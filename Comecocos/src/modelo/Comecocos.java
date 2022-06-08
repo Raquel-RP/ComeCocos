@@ -4,6 +4,7 @@ package modelo;
 /**
  * Subclase de personaje
  * @author Raquel Romero
+ * @author Raquel Pulido
  */
 public class Comecocos extends Personaje{
         
