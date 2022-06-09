@@ -6,6 +6,7 @@ import java.util.ArrayList;
 /**
  *
  * @author Raquel Romero
+ * @author Raquel Pulido
  */
 public class Modelo {
     

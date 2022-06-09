@@ -4,6 +4,7 @@ package modelo;
 /**
  * Hereda de personaje
  * @author Raquel Romero
+ * @author Raquel Pulido
  */
 public class Fantasma extends Personaje{
     

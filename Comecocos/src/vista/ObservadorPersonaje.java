@@ -2,8 +2,10 @@
 package vista;
 
 /**
- * Interfaz que actualiza 
+ * Interfaz que actualiza
+ * 
  * @author Raquel Romero
+ * @author Raquel Pulido
  */
 public interface ObservadorPersonaje {
     

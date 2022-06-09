@@ -5,6 +5,7 @@ import vista.ObservadorLaberinto;
 /**
  *
  * @author Raquel Romero
+ * @author Raquel Pulido
  */
 public class Laberinto {
 

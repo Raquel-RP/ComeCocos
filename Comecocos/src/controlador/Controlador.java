@@ -10,6 +10,7 @@ import vista.ComecocosFrame;
  * Inicializa y genera el juego.
  *
  * @author Raquel Romero
+ * @author Raquel Pulido
  */
 public class Controlador {
 

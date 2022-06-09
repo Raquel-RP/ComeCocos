@@ -16,7 +16,7 @@ public class Comecocos extends Personaje{
     }
     
     /**
-     * comecocos preparado para moverse cuando llama a este metodo
+     * Comecocos preparado para moverse cuando llama a este metodo
      * mira en que posicion esta el comecocos y calcular cual seria
      * la siguiente celda en la que se movería (celda de arriba, de abajo 
      * o de al lado)

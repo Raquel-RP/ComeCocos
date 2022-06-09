@@ -2,7 +2,8 @@ package modelo;
 
 /**
  * 
- * @author raque
+ * @author Raquel Romero
+ * @author Raquel Pulido
  */
 
 public class TareaAnimarPersonajes implements Runnable {

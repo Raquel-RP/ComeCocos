@@ -7,6 +7,7 @@ import modelo.Modelo;
 /**
  * 
  * @author Raquel Romero
+ * @author Raquel Pulido
  */
 public class ComecocosFrame extends javax.swing.JFrame implements 
         ObservadorLaberinto, ObservadorPersonaje{ //ComecocosFrame es observador de laberinto

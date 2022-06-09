@@ -6,6 +6,7 @@ import vista.ObservadorPersonaje;
  * Clase abstracta
  *
  * @author Raquel Romero
+ * @author Raquel Pulido
  */
 public abstract class Personaje {
 

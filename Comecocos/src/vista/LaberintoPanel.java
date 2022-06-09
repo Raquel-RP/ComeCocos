@@ -8,6 +8,7 @@ import modelo.Laberinto;
 /**
  *
  * @author Raquel Romero
+ * @author Raquel Pulido
  */
 public class LaberintoPanel extends javax.swing.JPanel {
 

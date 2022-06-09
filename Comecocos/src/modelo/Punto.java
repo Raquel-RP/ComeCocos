@@ -5,7 +5,8 @@ import java.util.Scanner;
 
 /**
  *
- * @author Raqeul Romero
+ * @author Raquel Romero
+ * @author Raquel Pulido
  */
 public class Punto {
    
