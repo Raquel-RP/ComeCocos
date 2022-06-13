@@ -73,10 +73,13 @@ public class Comecocos extends Personaje{
         switch(this.getDireccion()){
             
             case IZQUIERDA:
-                x--;
+                if(x == 0)
+                    x = 27;
+                else
+                    x--;
                 break;
             case DERECHA:
-                x++;
+                x = (x+1) % 28; // Longitud del laberinto
                 break;
             case ARRIBA:
                 y--;
