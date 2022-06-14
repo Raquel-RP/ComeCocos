@@ -35,6 +35,7 @@ public class LaberintoPanel extends javax.swing.JPanel {
         g.fillRect(0, 0, this.getWidth(), this.getHeight());
         dibujarLaberinto(g);
         dibujarComecocos(g);
+        dibujarFantasmas(g);
 
         // TODO dibujar fantasmas
     }
@@ -54,6 +55,16 @@ public class LaberintoPanel extends javax.swing.JPanel {
                         g.fillRect(columna * anchoCelda, fila * anchoCelda,
                                 anchoCelda, anchoCelda);
                         break;
+                    case COCOPEQUENO:
+                        g.setColor(Color.black);
+                        g.fillOval(columna * anchoCelda + anchoCelda/2,
+                                fila * anchoCelda + anchoCelda/2, 2, 2);
+                        break;
+                    case COCOGRANDE:
+                        g.setColor(Color.black);
+                        g.fillOval(columna * anchoCelda + 5,
+                                fila * anchoCelda + 5, 10, 10);
+                        break;
                 }
             }
         }
@@ -66,6 +77,10 @@ public class LaberintoPanel extends javax.swing.JPanel {
         g.setColor(Color.yellow);
         g.fillOval(comecocos.getColumna() * anchoCelda,
                 comecocos.getFila() * anchoCelda, anchoCelda, anchoCelda);
+    }
+    
+    private void dibujarFantasmas(Graphics g){
+        //toDo dibujar
     }
 
     /**
