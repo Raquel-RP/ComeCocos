@@ -39,9 +39,11 @@ public class TareaAnimarPersonajes implements Runnable {
         }
     }
 
+    /*
     public void start() {
-        continuar_ = true;
+        continuar_ = false;
     }
+    */
 
     public void pausa() {
         suspendFlag_ = true;
@@ -50,4 +52,5 @@ public class TareaAnimarPersonajes implements Runnable {
     public void resume() {
         suspendFlag_ = false;
     }
+    
 }
