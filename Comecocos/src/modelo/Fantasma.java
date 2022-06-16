@@ -85,6 +85,7 @@ public class Fantasma extends Personaje{
     
     /**
      * Coge la casilla con menor distancia euclidea posible al comecocos
+     * No funciona bien
      * @param modelo
      * @return 
      */

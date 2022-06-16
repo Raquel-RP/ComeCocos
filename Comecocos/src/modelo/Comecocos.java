@@ -29,22 +29,21 @@ public class Comecocos extends Personaje{
     public void mover(Modelo modelo) {
 
         Punto sigPosicion = siguientePosicion(); 
+        int puntos = modelo.getPuntos_();
         
+        //si la pos actual es en la col 0 la sig posicion tiene que ser x+27 (laberinto-1)
         if(modelo.getLaberinto().estaLibre(sigPosicion.getX(), sigPosicion.getY())){
             
             this.setColumnaFila(sigPosicion.getX(), sigPosicion.getY()); //paso 3 del guion
-            Laberinto.TipoCelda c = modelo.getLaberinto().getCelda(sigPosicion.getX(), sigPosicion.getY());
+            Laberinto.TipoCelda celda = modelo.getLaberinto().getCelda(sigPosicion.getX(), sigPosicion.getY());
             
-            if(c == Laberinto.TipoCelda.COCOPEQUENO){
-                //System.out.println("Coco pequeño es nueva celda"); 
-                modelo.getLaberinto().setCelda(sigPosicion.getX(), sigPosicion.getY(), Laberinto.TipoCelda.LIBRE);
-                
-                //puntuacion += 10;
+            if(celda == Laberinto.TipoCelda.COCOPEQUENO){
+                modelo.getLaberinto().setCelda(sigPosicion.getX(), sigPosicion.getY(), Laberinto.TipoCelda.LIBRE); // Se come el coco
+                puntos += 10;
             }
-            else if(c == Laberinto.TipoCelda.COCOGRANDE){
-                //System.out.println("Coco grande es nueva celda"); 
+            else if(celda == Laberinto.TipoCelda.COCOGRANDE){ 
                 modelo.getLaberinto().setCelda(sigPosicion.getX(), sigPosicion.getY(), Laberinto.TipoCelda.LIBRE);
-                //puntuacion += 50;
+                puntos += 50;
             }
             /*
             iterar por modelo.fantasma y comprobar si están en la posición
@@ -52,6 +51,7 @@ public class Comecocos extends Personaje{
             FANTASMA NO COMESTIBLE
             */
         }
+        modelo.setPuntos_(puntos); // Máximo 2620
         notificarCambio();
     }
     
