@@ -50,7 +50,8 @@ public class Modelo {
     
     public void inicializarJuego() {
         laberinto_.inicializar();
-        comecocos_.inicializar(this); 
+        comecocos_.inicializar(this);
+        this.setPuntos_(0);//para que los puntos empiecen en 0 siempre que se inicialice
         
         for (int i = 0; i < fantasmas_.size(); i++){
             this.getFantasma(i).inicializar(this);
@@ -73,7 +74,8 @@ public class Modelo {
     }
 
     public void start() {
-        this.animadorPersonajes_.start();
+        this.inicializarJuego();//inicializa el juego con los valores iniciales
+        //this.animadorPersonajes_.start();
     }
 
     public void pausa() {
