@@ -36,6 +36,7 @@ public class ComecocosFrame extends javax.swing.JFrame implements
     @Override
     public void actualizarObservadorPersonaje() {
         this.getLaberintoPanel().repaint();
+        jLabel2.setText(valueOf(modelo_.getPuntos_()));
     }
 
     public Modelo getModelo() {
@@ -68,7 +69,7 @@ public class ComecocosFrame extends javax.swing.JFrame implements
         jSeparator2 = new javax.swing.JSeparator();
         jLabel1 = new javax.swing.JLabel();
         jButton4 = new javax.swing.JButton();
-        label1 = new java.awt.Label();
+        jLabel2 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
 
@@ -133,8 +134,10 @@ public class ComecocosFrame extends javax.swing.JFrame implements
             }
         });
 
-        label1.setFont(new java.awt.Font("Courier New", 1, 14)); // NOI18N
-        label1.setText("0");
+        jLabel2.setBackground(new java.awt.Color(204, 204, 255));
+        jLabel2.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel2.setText("0");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -157,8 +160,8 @@ public class ComecocosFrame extends javax.swing.JFrame implements
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addGap(39, 39, 39)
                 .addComponent(jLabel1)
-                .addGap(23, 23, 23)
-                .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(58, 58, 58))
         );
         jPanel2Layout.setVerticalGroup(
@@ -175,9 +178,9 @@ public class ComecocosFrame extends javax.swing.JFrame implements
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(72, 72, 72)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel2))
                 .addGap(42, 42, 42)
                 .addComponent(jButton4)
                 .addContainerGap(119, Short.MAX_VALUE))
@@ -188,7 +191,7 @@ public class ComecocosFrame extends javax.swing.JFrame implements
         laberintoPanel1Layout.setHorizontalGroup(
             laberintoPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, laberintoPanel1Layout.createSequentialGroup()
-                .addGap(0, 200, Short.MAX_VALUE)
+                .addGap(0, 198, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         laberintoPanel1Layout.setVerticalGroup(
@@ -200,7 +203,6 @@ public class ComecocosFrame extends javax.swing.JFrame implements
         jMenuBar1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jMenuBar1.setForeground(new java.awt.Color(0, 0, 0));
         jMenuBar1.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 12)); // NOI18N
-        jMenuBar1.setOpaque(true);
 
         jMenu1.setBackground(new java.awt.Color(0, 255, 255));
         jMenu1.setForeground(new java.awt.Color(0, 0, 0));
@@ -291,12 +293,12 @@ public class ComecocosFrame extends javax.swing.JFrame implements
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
-    private java.awt.Label label1;
     private vista.LaberintoPanel laberintoPanel1;
     // End of variables declaration//GEN-END:variables
 
