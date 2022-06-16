@@ -2,6 +2,7 @@ package vista;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import static java.lang.String.valueOf;
 import modelo.Comecocos;
 import modelo.Laberinto;
 
@@ -37,7 +38,7 @@ public class LaberintoPanel extends javax.swing.JPanel {
         dibujarComecocos(g);
         dibujarFantasmas(g);
 
-        // TODO dibujar fantasmas
+        dibujarFantasmas(g);
     }
 
     private void dibujarLaberinto(Graphics g) {
@@ -56,14 +57,19 @@ public class LaberintoPanel extends javax.swing.JPanel {
                                 anchoCelda, anchoCelda);
                         break;
                     case COCOPEQUENO:
-                        g.setColor(Color.black);
-                        g.fillOval(columna * anchoCelda + anchoCelda/2,
-                                fila * anchoCelda + anchoCelda/2, 2, 2);
+                        g.setColor(Color.BLACK);
+                        g.fillOval(columna * anchoCelda + anchoCelda / 4 + 3, fila * anchoCelda + anchoCelda / 4 + 3,
+                                anchoCelda / 5, anchoCelda / 5);
                         break;
                     case COCOGRANDE:
+                        g.setColor(Color.BLACK);
+                        g.fillOval(columna * anchoCelda + anchoCelda / 2 - 3, fila * anchoCelda + anchoCelda / 2 - 3,
+                                anchoCelda / 2, anchoCelda / 2);
+                        break;
+                    case PUERTA:
                         g.setColor(Color.black);
-                        g.fillOval(columna * anchoCelda + 5,
-                                fila * anchoCelda + 5, 10, 10);
+                        g.fillRect(columna * anchoCelda, fila * anchoCelda + 4 * anchoCelda / 5,
+                                anchoCelda, anchoCelda / 5);
                         break;
                 }
             }
@@ -78,9 +84,36 @@ public class LaberintoPanel extends javax.swing.JPanel {
         g.fillOval(comecocos.getColumna() * anchoCelda,
                 comecocos.getFila() * anchoCelda, anchoCelda, anchoCelda);
     }
-    
-    private void dibujarFantasmas(Graphics g){
-        //toDo dibujar
+
+        private void dibujarFantasmas(Graphics g) {
+
+        for (int i = 0; i < 4; i++) {
+
+            String fantasma = valueOf(comecocosFrame_.getModelo().getFantasma(i).getNombre());
+
+            switch (fantasma) {
+
+                case "INKY":
+                    g.setColor(Color.cyan);
+                    break;
+
+                case "PINKY":
+                    g.setColor(Color.pink);
+                    break;
+
+                case "BLINKY":
+                    g.setColor(Color.red);
+                    break;
+                    
+                case "CLYDE":
+                    g.setColor(Color.orange);
+                    break;
+            }
+
+            g.fillOval(comecocosFrame_.getModelo().getFantasma(i).getColumna() * anchoCelda + 3,
+                    comecocosFrame_.getModelo().getFantasma(i).getFila() * anchoCelda + 3,
+                    anchoCelda - 6, anchoCelda - 6);
+        }
     }
 
     /**

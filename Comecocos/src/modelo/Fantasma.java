@@ -6,6 +6,7 @@ package modelo;
  * @author Raquel Romero
  * @author Raquel Pulido
  */
+
 public class Fantasma extends Personaje{
     
     public enum NombreFantasma {
@@ -14,25 +15,32 @@ public class Fantasma extends Personaje{
     
     private NombreFantasma nombre_;
     
-    public Fantasma(){
+    public Fantasma(int col, int fila, NombreFantasma nombre){
+        this.setColumnaFila(col, fila);
+        this.nombre_ = nombre;
+        this.setDireccion(Personaje.Direccion.NINGUNA);
+    }
+
+    public NombreFantasma getNombre() {
+        return nombre_;
     }
     
     @Override
     public void inicializar(Modelo modelo){
-        this.setColumnaFila(14,14);
-        this.setDireccion(Direccion.NINGUNA);
-        modelo.inicializarJuego();
+        //this.setColumnaFila(14,14);
+        //this.setDireccion(Direccion.NINGUNA);
+       // modelo.inicializarJuego();
     }
     
     @Override
     public void mover (Modelo modelo){ 
         Punto sigPosicion;
         
-        if(modelo.getLaberinto().esInterseccion(this.getColumna(), this.getFila())){
+        if(modelo.getLaberinto().esCruce(this.getColumna(), this.getFila())){
             
             if(this.nombre_ == NombreFantasma.BLINKY || this.nombre_ == NombreFantasma.PINKY){
                
-                sigPosicion = this.getCasillaMasCercana(modelo); 
+                sigPosicion = this.getCasillaPerseguir(modelo); 
             }
         }
         
@@ -49,14 +57,13 @@ public class Fantasma extends Personaje{
                 */
             }
         }
-        
         notificarCambio();
     }
     
     private Punto siguientePosicion(){ //preguntar si se puede poner en la superclase Personaje para no repetir 
          
         Punto p = new Punto(this.getColumna(), this.getFila());
-        Direccion d = this.getDireccion();
+        Personaje.Direccion d = this.getDireccion();
         
         switch(d){
             
@@ -72,18 +79,22 @@ public class Fantasma extends Personaje{
             case ABAJO:
                 p.setCoordenadas(p.getX(), p.getY()+1);
                 break;
-        }
-        
+        } 
         return p;
     }
-        
-    private Punto getCasillaMasCercana(Modelo modelo){
+    
+    /**
+     * Coge la casilla con menor distancia euclidea posible al comecocos
+     * @param modelo
+     * @return 
+     */
+    private Punto getCasillaPerseguir(Modelo modelo){
 
-        Punto posicionActual = new Punto(this.getColumna(), this.getFila());
-        Punto posicionComecocos = new Punto(modelo.getComecocos().getColumna(), modelo.getComecocos().getFila());
-        Punto mejorPunto = null;
+        Punto posActual = new Punto(this.getColumna(), this.getFila());
+        Punto posComecocos = new Punto(modelo.getComecocos().getColumna(), modelo.getComecocos().getFila());
         double mejorDistancia = 0;
-
+        Punto mejorPunto = null;
+        
         int columna = this.getColumna();
         int fila = this.getFila();
 
@@ -93,41 +104,26 @@ public class Fantasma extends Personaje{
             if (laberinto.estaLibre(columna-1, fila)){
                 if(mejorPunto == null){
                     mejorPunto = new Punto(columna-1, fila);
-                    mejorDistancia = mejorPunto.getDistanciaEuclidea(posicionComecocos);
+                    mejorDistancia = mejorPunto.getDistanciaEuclidea(posComecocos);
                 }
                 else{
-                    if(posicionActual.getDistanciaEuclidea(posicionComecocos) < mejorDistancia){
+                    if(posActual.getDistanciaEuclidea(posComecocos) < mejorDistancia){
 
                         mejorPunto = new Punto(columna-1, fila);
-                        mejorDistancia = mejorPunto.getDistanciaEuclidea(posicionComecocos);
-
-                    }
-                }
-            }
-            else if (laberinto.estaLibre(columna, fila-1)){
-                if(mejorPunto == null){
-                    mejorPunto = new Punto(columna, fila-1);
-                    mejorDistancia = mejorPunto.getDistanciaEuclidea(posicionComecocos);
-                }
-                else{
-                    if(posicionActual.getDistanciaEuclidea(posicionComecocos) < mejorDistancia){
-
-                        mejorPunto = new Punto(columna, fila-1);
-                        mejorDistancia = mejorPunto.getDistanciaEuclidea(posicionComecocos);
-                            
+                        mejorDistancia = mejorPunto.getDistanciaEuclidea(posComecocos);
                     }
                 }
             }
             else if (laberinto.estaLibre(columna+1, fila)){
                 if(mejorPunto == null){
                     mejorPunto = new Punto(columna+1, fila);
-                    mejorDistancia = mejorPunto.getDistanciaEuclidea(posicionComecocos);
+                    mejorDistancia = mejorPunto.getDistanciaEuclidea(posComecocos);
                 }
                 else{
-                    if(posicionActual.getDistanciaEuclidea(posicionComecocos) < mejorDistancia){
+                    if(posActual.getDistanciaEuclidea(posComecocos) < mejorDistancia){
                             
                         mejorPunto = new Punto(columna+1, fila);
-                        mejorDistancia = mejorPunto.getDistanciaEuclidea(posicionComecocos);
+                        mejorDistancia = mejorPunto.getDistanciaEuclidea(posComecocos);
                             
                     }
                 }
@@ -135,21 +131,32 @@ public class Fantasma extends Personaje{
             else if (laberinto.estaLibre(columna, fila+1)){
                 if(mejorPunto == null){
                     mejorPunto = new Punto(columna, fila+1);
-                    mejorDistancia = mejorPunto.getDistanciaEuclidea(posicionComecocos);
+                    mejorDistancia = mejorPunto.getDistanciaEuclidea(posComecocos);
                 }
                 else{
-                    if(posicionActual.getDistanciaEuclidea(posicionComecocos) < mejorDistancia){
+                    if(posActual.getDistanciaEuclidea(posComecocos) < mejorDistancia){
                             
                         mejorPunto = new Punto(columna, fila+1);
-                        mejorDistancia = mejorPunto.getDistanciaEuclidea(posicionComecocos);
+                        mejorDistancia = mejorPunto.getDistanciaEuclidea(posComecocos);
                            
                     }
                 }
             }
-        }
-            
+            else if (laberinto.estaLibre(columna, fila-1)){
+                if(mejorPunto == null){
+                    mejorPunto = new Punto(columna, fila-1);
+                    mejorDistancia = mejorPunto.getDistanciaEuclidea(posComecocos);
+                }
+                else{
+                    if(posActual.getDistanciaEuclidea(posComecocos) < mejorDistancia){
+
+                        mejorPunto = new Punto(columna, fila-1);
+                        mejorDistancia = mejorPunto.getDistanciaEuclidea(posComecocos);
+                            
+                    }
+                }
+            }
+        }    
         return mejorPunto;
-    }
-    
-    
+    }  
 }

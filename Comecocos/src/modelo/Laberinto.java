@@ -121,19 +121,31 @@ public class Laberinto {
         return libre;
     }
 
-    public boolean esInterseccion(int columna, int fila) {
-
-        int caminos = 0;
-
-        if (this.estaLibre(columna - 1, fila)) {
-            caminos++;
-        } else if (this.estaLibre(columna, fila - 1)) {
-            caminos++;
-        } else if (this.estaLibre(columna + 1, fila)) {
-            caminos++;
-        } else if (this.estaLibre(columna, fila + 1)) {
-            caminos++;
+    /**
+     * Comprueba si es una intersección la casilla
+     * @param columna
+     * @param fila
+     * @return 
+     */
+    public boolean esCruce(int columna, int fila) {
+        boolean cruce = false;
+        
+        boolean izq = estaLibre(columna - 1, fila);
+        boolean drcha = estaLibre(columna + 1, fila);
+        boolean arriba = estaLibre(columna, fila - 1);
+        boolean abajo = estaLibre(columna, fila + 1);
+        
+        boolean[] vLibre = {izq, drcha, arriba, abajo};
+        
+        int cuenta = 0;
+        
+        for (int i = 0; i < vLibre.length; i++) {
+            if (vLibre[i])
+                cuenta++;
         }
-        return caminos > 2;
+        cruce = cuenta > 2;
+        
+        return cruce;
     }
+    
 }
