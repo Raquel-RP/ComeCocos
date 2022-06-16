@@ -83,4 +83,8 @@ public class Modelo {
     public void resume() {
         this.animadorPersonajes_.resume();
     }
+    
+    public void salir(){
+        System.exit(0);
+    }
 }
