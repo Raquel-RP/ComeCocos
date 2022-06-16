@@ -27,7 +27,7 @@ public class ComecocosFrame extends javax.swing.JFrame implements
         modelo_.getLaberinto().registrarObservador(this); // observador de laberinto
         modelo_.getComecocos().registrarObservador(this); // TODO registrarObservador
     }
-
+    
     @Override
     public void actualizarObservadorLaberinto() {
         this.getLaberintoPanel().repaint();
@@ -250,12 +250,15 @@ public class ComecocosFrame extends javax.swing.JFrame implements
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        modelo_ = new Modelo();
+        /*modelo_ = new Modelo();
         controlador_ = new Controlador(modelo_);
         // Registros de observador de los objetos del modelo
         modelo_.getLaberinto().registrarObservador(this); // observador de laberinto
         modelo_.getComecocos().registrarObservador(this); // registrarObservador
-        initComponents();
+        initComponents();*/
+        //Con esto anterior estaba creando un nuevo juego
+        //Empieza de nuevo pero se quedan bloqueadas las teclas
+        modelo_.start();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
