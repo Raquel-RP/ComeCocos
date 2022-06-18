@@ -3,7 +3,7 @@ Práctica 8 de las asignatura Complementos de Programación
 
 Falta por hacer: por orden de prioridad
 
-- casi HECHO -> Botón start empieza un juego nuevo pero en una ventana nueva, corregir. Al darle start la hebra sube de velocidad no se por qué
+- HECHO -> Botón start empieza un juego nuevo pero en una ventana nueva, corregir.
   revisar como hacer el método **terminar()** para que la hebra termine
 - HECHO -> Botón resume no funciona. Ver cómo hacerlo en el método run() de TareaAnimarPersonajes, con el método synchronized() y wait()
 - HECHO -> Botón salir del juego
