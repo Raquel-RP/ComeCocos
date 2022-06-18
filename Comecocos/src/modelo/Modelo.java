@@ -66,7 +66,7 @@ public class Modelo {
     }*/
     public void crearTareaLanzarHebraAnimarPersonajes() {
         if (animadorPersonajes_ != null) {
-            //TODO animadorPersonajes_.terminar();
+            animadorPersonajes_.terminar(); //TODO
         }
         animadorPersonajes_ = new TareaAnimarPersonajes(this);
         Thread t = new Thread(animadorPersonajes_); //Hebra creada
@@ -75,7 +75,6 @@ public class Modelo {
 
     public void start() {
         this.inicializarJuego();//inicializa el juego con los valores iniciales
-        //this.animadorPersonajes_.start();
     }
 
     public void pausa() {

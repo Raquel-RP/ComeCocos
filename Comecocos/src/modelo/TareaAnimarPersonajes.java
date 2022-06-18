@@ -30,27 +30,27 @@ public class TareaAnimarPersonajes implements Runnable {
                 modelo_.getComecocos().mover(modelo_);
                 // Mover también los fantasmas
                 for (int i = 0; i < 4; i++) {
+                    modelo_.getComecocos().colision(modelo_.getFantasma(i), modelo_);  // Comprueba colision antes de moverse por si el comecocos se ha movido donde esta el fantasma
                     //TODO implementar el mover fantasmas
                     //modelo_.getFantasma(i).mover(modelo_);
+                    modelo_.getComecocos().colision(modelo_.getFantasma(i), modelo_);  // Comprueba colision por si el fantasma se ha movido donde el comecocos
                 }
-                Thread.sleep(delay_);
+                Thread.sleep(delay_); //Para la velocidad del juego
             } // end while
         } catch (InterruptedException e) { //excepción comprobada que pueden lanzarla sleep y wait
         }
     }
 
-    /*
-    public void start() {
-        continuar_ = false;
-    }
-    */
-
     public void pausa() {
         suspendFlag_ = true;
     }
 
-    public void resume() {
+    public synchronized void resume() {
         suspendFlag_ = false;
+        notify();
     }
     
+    public void terminar() {
+    //    Thread.interrupt(); no existe el metodo interrupt pero es el que se usa para parar la hebra?
+    }
 }

@@ -40,6 +40,9 @@ public class ComecocosFrame extends javax.swing.JFrame implements
         if(modelo_.getPuntos_() == 2620){
             jTextField1.setText("¡Fin de la partida!");
         }
+        if (!modelo_.getComecocos().isVivo()){
+            jTextField1.setText("¡Fin de la partida!");
+        }
     }
     
     public Modelo getModelo() {
@@ -98,7 +101,6 @@ public class ComecocosFrame extends javax.swing.JFrame implements
 
         jButton1.setBackground(new java.awt.Color(255, 204, 102));
         jButton1.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 12)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(0, 0, 0));
         jButton1.setText("Start");
         jButton1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -109,7 +111,6 @@ public class ComecocosFrame extends javax.swing.JFrame implements
 
         jButton2.setBackground(new java.awt.Color(255, 51, 102));
         jButton2.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 12)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(0, 0, 0));
         jButton2.setText("Pause");
         jButton2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -120,7 +121,6 @@ public class ComecocosFrame extends javax.swing.JFrame implements
 
         jButton3.setBackground(new java.awt.Color(0, 204, 204));
         jButton3.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 12)); // NOI18N
-        jButton3.setForeground(new java.awt.Color(0, 0, 0));
         jButton3.setText("Resume");
         jButton3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -130,12 +130,10 @@ public class ComecocosFrame extends javax.swing.JFrame implements
         });
 
         jLabel1.setFont(new java.awt.Font("Tw Cen MT Condensed", 1, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("Puntos: ");
 
         jButton4.setBackground(new java.awt.Color(255, 0, 51));
         jButton4.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 12)); // NOI18N
-        jButton4.setForeground(new java.awt.Color(0, 0, 0));
         jButton4.setText("Exit");
         jButton4.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jButton4.addActionListener(new java.awt.event.ActionListener() {
@@ -146,7 +144,6 @@ public class ComecocosFrame extends javax.swing.JFrame implements
 
         jLabel2.setBackground(new java.awt.Color(204, 204, 255));
         jLabel2.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel2.setText("0");
 
@@ -224,7 +221,7 @@ public class ComecocosFrame extends javax.swing.JFrame implements
 
         jMenuBar1.setBackground(new java.awt.Color(0, 204, 204));
         jMenuBar1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jMenuBar1.setForeground(new java.awt.Color(0, 0, 0));
+        jMenuBar1.setForeground(new java.awt.Color(0, 204, 204));
         jMenuBar1.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 12)); // NOI18N
 
         jMenu1.setBackground(new java.awt.Color(0, 255, 255));
@@ -250,15 +247,7 @@ public class ComecocosFrame extends javax.swing.JFrame implements
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        /*modelo_ = new Modelo();
-        controlador_ = new Controlador(modelo_);
-        // Registros de observador de los objetos del modelo
-        modelo_.getLaberinto().registrarObservador(this); // observador de laberinto
-        modelo_.getComecocos().registrarObservador(this); // registrarObservador
-        initComponents();*/
-        //Con esto anterior estaba creando un nuevo juego
-        //Empieza de nuevo pero se quedan bloqueadas las teclas
-        modelo_.start();
+        modelo_.inicializarJuego();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed

@@ -8,11 +8,17 @@ package modelo;
  */
 public class Comecocos extends Personaje {
 
+    public boolean vivo_;
+
     public Comecocos(Modelo modelo) {
 
         // para que sepa donde esta el centro hay que pasarle el modelo para
         // que al llamar a inicializar podamos saber donde esta el centro del laberinto
         this.inicializar(modelo);
+    }
+
+    public boolean isVivo() {
+        return vivo_;
     }
 
     /**
@@ -64,6 +70,7 @@ public class Comecocos extends Personaje {
     public void inicializar(Modelo modelo) {
         this.setColumnaFila(13, 17);
         this.setDireccion(Direccion.NINGUNA);
+        this.vivo_ = true;
     }
 
     private Punto siguientePosicion() {
@@ -96,5 +103,19 @@ public class Comecocos extends Personaje {
         }
         punto.setCoordenadas(x, y);
         return punto;
+    }
+
+    public void colision(Fantasma fantasma, Modelo modelo) {
+        boolean colision = false;
+
+        if (fantasma.getFila() == this.getFila() && fantasma.getColumna() == this.getColumna()) {
+            colision = true;
+        }
+        
+        if(colision){
+            vivo_ = false;
+            notificarCambio();
+            modelo.start();
+        }
     }
 }
