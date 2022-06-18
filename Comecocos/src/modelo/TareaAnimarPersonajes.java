@@ -51,6 +51,6 @@ public class TareaAnimarPersonajes implements Runnable {
     }
     
     public void terminar() {
-    //    Thread.interrupt(); no existe el metodo interrupt pero es el que se usa para parar la hebra?
+        continuar_ = false;
     }
 }
