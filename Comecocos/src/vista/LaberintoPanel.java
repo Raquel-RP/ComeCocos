@@ -32,7 +32,7 @@ public class LaberintoPanel extends javax.swing.JPanel {
     protected void paintComponent(Graphics g) {
 
         super.paintComponent(g);
-        g.setColor(Color.white);
+        g.setColor(Color.black);
         g.fillRect(0, 0, this.getWidth(), this.getHeight());
         dibujarLaberinto(g);
         dibujarComecocos(g);
@@ -52,22 +52,22 @@ public class LaberintoPanel extends javax.swing.JPanel {
 
                 switch (laberinto.getCelda(columna, fila)) {
                     case BLOQUE:
-                        g.setColor(Color.blue);
+                        g.setColor(Color.BLUE);
                         g.fillRect(columna * anchoCelda, fila * anchoCelda,
                                 anchoCelda, anchoCelda);
                         break;
                     case COCOPEQUENO:
-                        g.setColor(Color.BLACK);
+                        g.setColor(Color.white);
                         g.fillOval(columna * anchoCelda + anchoCelda / 4 + 3, fila * anchoCelda + anchoCelda / 4 + 3,
                                 anchoCelda / 5, anchoCelda / 5);
                         break;
                     case COCOGRANDE:
-                        g.setColor(Color.BLACK);
+                        g.setColor(Color.white);
                         g.fillOval(columna * anchoCelda + anchoCelda / 2 - 3, fila * anchoCelda + anchoCelda / 2 - 3,
                                 anchoCelda / 2, anchoCelda / 2);
                         break;
                     case PUERTA:
-                        g.setColor(Color.black);
+                        g.setColor(Color.white);
                         g.fillRect(columna * anchoCelda, fila * anchoCelda + 4 * anchoCelda / 5,
                                 anchoCelda, anchoCelda / 5);
                         break;
@@ -85,7 +85,7 @@ public class LaberintoPanel extends javax.swing.JPanel {
                 comecocos.getFila() * anchoCelda, anchoCelda, anchoCelda);
     }
 
-        private void dibujarFantasmas(Graphics g) {
+    private void dibujarFantasmas(Graphics g) {
 
         for (int i = 0; i < 4; i++) {
 
@@ -104,7 +104,7 @@ public class LaberintoPanel extends javax.swing.JPanel {
                 case "BLINKY":
                     g.setColor(Color.red);
                     break;
-                    
+
                 case "CLYDE":
                     g.setColor(Color.orange);
                     break;
