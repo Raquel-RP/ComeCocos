@@ -44,7 +44,7 @@ public class Modelo {
         return puntos_;
     }
 
-    public void setPuntos(int puntos_) {
+    public void setPuntos(int puntos) {
         this.puntos_ = puntos_;
     }
     
