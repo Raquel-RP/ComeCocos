@@ -39,12 +39,15 @@ public class Fantasma extends Personaje{
         if(modelo.getLaberinto().esCruce(this.getColumna(), this.getFila())){
             
             if(this.nombre_ == NombreFantasma.BLINKY || this.nombre_ == NombreFantasma.PINKY){
-               
                 sigPosicion = this.getCasillaPerseguir(modelo); 
+            }
+            else{//Clyde, Inky
+                sigPosicion = siguientePosicion();
+            
             }
         }
         
-        else{
+        else{ //si no es cruce
             sigPosicion = siguientePosicion();
             if(modelo.getLaberinto().estaLibre(sigPosicion.getX(), sigPosicion.getY())){
             

@@ -107,15 +107,23 @@ public class Comecocos extends Personaje {
 
     public void colision(Fantasma fantasma, Modelo modelo) {
         boolean colision = false;
+        int vidas = modelo.getVidas();
 
         if (fantasma.getFila() == this.getFila() && fantasma.getColumna() == this.getColumna()) {
             colision = true;
+            vidas--;
+            modelo.setVidas(vidas);
+            if(vidas == 0){
+                modelo.salir();
+            }
+            else
+                modelo.start();
         }
         
         if(colision){
             vivo_ = false;
             notificarCambio();
-            modelo.start();
+            
         }
     }
 }

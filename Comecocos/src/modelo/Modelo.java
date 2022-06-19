@@ -14,6 +14,7 @@ public class Modelo {
     private ArrayList<Fantasma> fantasmas_;
     private TareaAnimarPersonajes animadorPersonajes_;
     private int puntos_;
+    private int vidas_ = 3;
         
     public Modelo(){
         laberinto_ = new Laberinto();
@@ -43,9 +44,17 @@ public class Modelo {
     public int getPuntos_() {
         return puntos_;
     }
-
+    
     public void setPuntos_(int puntos_) {
         this.puntos_ = puntos_;
+    }
+    
+    public int getVidas(){
+        return vidas_;
+    }
+    
+    public void setVidas(int vidas){
+        vidas_ = vidas;
     }
     
     public void inicializarJuego() {
