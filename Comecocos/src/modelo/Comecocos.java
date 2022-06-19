@@ -57,11 +57,11 @@ public class Comecocos extends Personaje {
         }
         //Si llega al máximo de puntos
         if (puntos == 2620) {
-            modelo.setPuntos_(puntos);
+            modelo.setPuntos(puntos);
             notificarCambio();
             modelo.pausa(); //Pausa el juego, si le doy a resume (cuando funcione) sigue, habria que cambiarlo
         } else {
-            modelo.setPuntos_(puntos);
+            modelo.setPuntos(puntos);
             notificarCambio();
         }
     }
