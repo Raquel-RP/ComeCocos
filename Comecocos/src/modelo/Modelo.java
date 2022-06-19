@@ -41,12 +41,12 @@ public class Modelo {
         return fantasmas_.get(index);
     }
 
-    public int getPuntos_() {
+    public int getPuntos() {
         return puntos_;
     }
-    
-    public void setPuntos_(int puntos_) {
-        this.puntos_ = puntos_;
+
+    public void setPuntos(int puntos) {
+        this.puntos_ = puntos;
     }
     
     public int getVidas(){
@@ -60,7 +60,7 @@ public class Modelo {
     public void inicializarJuego() {
         laberinto_.inicializar();
         comecocos_.inicializar(this);
-        this.setPuntos_(0);//para que los puntos empiecen en 0 siempre que se inicialice
+        this.setPuntos(0);//para que los puntos empiecen en 0 siempre que se inicialice
         
         for (int i = 0; i < fantasmas_.size(); i++){
             this.getFantasma(i).inicializar(this);
