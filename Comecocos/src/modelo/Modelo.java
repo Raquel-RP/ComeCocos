@@ -1,6 +1,5 @@
 package modelo;
 
-import static java.lang.String.valueOf;
 import java.util.ArrayList;
 
 /**
@@ -60,24 +59,10 @@ public class Modelo {
         
         this.crearTareaLanzarHebraAnimarPersonajes();
     }
-    
-    
-    public int colisionComecocosFantasma(){
-        int colision = -1;//no colision
-        
-        for(int i=0; i<fantasmas_.size(); i++){
-            if(comecocos_.colision(getFantasma(i), this)){
-                colision = i;
-                this.inicializarJuego();
-            }
-        }
-        
-        return colision;
-    }
-    
+
     public void crearTareaLanzarHebraAnimarPersonajes() {
         if (animadorPersonajes_ != null) {
-            animadorPersonajes_.terminar(); //TODO
+            animadorPersonajes_.terminar(); 
         }
         animadorPersonajes_ = new TareaAnimarPersonajes(this);
         Thread t = new Thread(animadorPersonajes_); //Hebra creada
@@ -86,6 +71,7 @@ public class Modelo {
 
     public void start() {
         this.inicializarJuego();//inicializa el juego con los valores iniciales
+        comecocos_.setVidas(3);
     }
 
     public void pausa() {

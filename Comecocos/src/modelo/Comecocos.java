@@ -9,12 +9,13 @@ package modelo;
 public class Comecocos extends Personaje {
 
     public boolean vivo_;
-    private int vidas_ = 3;
+    public int vidas_;
 
     public Comecocos(Modelo modelo) {
 
         // para que sepa donde esta el centro hay que pasarle el modelo para
         // que al llamar a inicializar podamos saber donde esta el centro del laberinto
+        this.vidas_ = 3;
         this.inicializar(modelo);
     }
 
@@ -22,14 +23,14 @@ public class Comecocos extends Personaje {
         return vivo_;
     }
 
-    public int getVidas(){
+    public int getVidas() {
         return vidas_;
     }
-    
-    public void setVidas(int vidas){
+
+    public void setVidas(int vidas) {
         vidas_ = vidas;
     }
-    
+   
     /**
      * Comecocos preparado para moverse cuando llama a este metodo mira en que
      * posicion esta el comecocos y calcular cual seria la siguiente celda en la
@@ -68,7 +69,7 @@ public class Comecocos extends Personaje {
         if (puntos == 2620) {
             modelo.setPuntos(puntos);
             notificarCambio();
-            modelo.pausa(); //Pausa el juego, si le doy a resume (cuando funcione) sigue, habria que cambiarlo
+            modelo.pausa();
         } else {
             modelo.setPuntos(puntos);
             notificarCambio();
@@ -78,7 +79,7 @@ public class Comecocos extends Personaje {
     @Override
     public void inicializar(Modelo modelo) {
         this.setColumnaFila(13, 17);
-        this.setDireccion(Direccion.NINGUNA);
+        this.setDireccion(Personaje.Direccion.NINGUNA);
         this.vivo_ = true;
     }
 
@@ -114,22 +115,19 @@ public class Comecocos extends Personaje {
         return punto;
     }
 
-    public boolean colision(Fantasma fantasma, Modelo modelo) {
-        boolean colision = false;
-        int vidas = this.getVidas();
-        
+    public void colision(Fantasma fantasma, Modelo modelo) {
+
         if (fantasma.getFila() == this.getFila() && fantasma.getColumna() == this.getColumna()) {
-            colision = true;
-            
-            vidas--;
-            setVidas(vidas);
+            vidas_--;
+            System.out.println(vidas_);
+            if (vidas_ == 0) {
+                vivo_ = false;
+                notificarCambio();
+                modelo.pausa();
+            } else {
+                modelo.inicializarJuego();
+            }
+            //setVidas(vidas_);
         }
-        
-        if(colision || vidas == 0){
-            vivo_ = false;
-            notificarCambio();
-            modelo.inicializarJuego();
-        }
-        return colision;
     }
 }
