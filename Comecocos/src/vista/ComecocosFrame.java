@@ -37,11 +37,10 @@ public class ComecocosFrame extends javax.swing.JFrame implements
     public void actualizarObservadorPersonaje() {
         this.getLaberintoPanel().repaint();
         jLabel2.setText(valueOf(modelo_.getPuntos_()));
+        
         if(modelo_.getPuntos_() == 2620){
-            jTextField1.setText("¡Fin de la partida!");
-        }
-        if (!modelo_.getComecocos().isVivo()){
-            jTextField1.setText("¡Fin de la partida!");
+            jTextField1.setText("¡Máxima puntuación alcanzada!");
+            jButton3.setVisible(false); // Si acaba la partida no puede hacer resume
         }
     }
     
@@ -248,6 +247,8 @@ public class ComecocosFrame extends javax.swing.JFrame implements
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         modelo_.inicializarJuego();
+        jButton3.setVisible(true);
+        jTextField1.setText("");
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed

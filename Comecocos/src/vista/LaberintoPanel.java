@@ -149,7 +149,6 @@ public class LaberintoPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseEntered
-        System.out.println("Mouse Entered");
         requestFocus(); // Para que los eventos del teclado los reciba el panel
     }//GEN-LAST:event_formMouseEntered
 
