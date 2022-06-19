@@ -34,7 +34,7 @@ public class Comecocos extends Personaje {
     public void mover(Modelo modelo) {
 
         Punto sigPosicion = siguientePosicion();
-        int puntos = modelo.getPuntos_();
+        int puntos = modelo.getPuntos();
 
         //si la pos actual es en la col 0 la sig posicion tiene que ser x+27 (laberinto-1)
         if (modelo.getLaberinto().estaLibre(sigPosicion.getX(), sigPosicion.getY())) {

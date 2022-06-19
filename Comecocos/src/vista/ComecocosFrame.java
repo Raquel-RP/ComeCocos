@@ -36,9 +36,9 @@ public class ComecocosFrame extends javax.swing.JFrame implements
     @Override
     public void actualizarObservadorPersonaje() {
         this.getLaberintoPanel().repaint();
-        jLabel2.setText(valueOf(modelo_.getPuntos_()));
+        jLabel2.setText(valueOf(modelo_.getPuntos()));
         
-        if(modelo_.getPuntos_() == 2620){
+        if(modelo_.getPuntos() == 2620){
             jTextField1.setText("¡Máxima puntuación alcanzada!");
             jButton3.setVisible(false); // Si acaba la partida no puede hacer resume
         }

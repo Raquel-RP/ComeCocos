@@ -40,7 +40,7 @@ public class Modelo {
         return fantasmas_.get(index);
     }
 
-    public int getPuntos_() {
+    public int getPuntos() {
         return puntos_;
     }
 
