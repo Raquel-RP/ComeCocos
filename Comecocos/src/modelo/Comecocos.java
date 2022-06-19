@@ -9,6 +9,7 @@ package modelo;
 public class Comecocos extends Personaje {
 
     public boolean vivo_;
+    private int vidas_ = 3;
 
     public Comecocos(Modelo modelo) {
 
@@ -21,6 +22,14 @@ public class Comecocos extends Personaje {
         return vivo_;
     }
 
+    public int getVidas(){
+        return vidas_;
+    }
+    
+    public void setVidas(int vidas){
+        vidas_ = vidas;
+    }
+    
     /**
      * Comecocos preparado para moverse cuando llama a este metodo mira en que
      * posicion esta el comecocos y calcular cual seria la siguiente celda en la
@@ -105,25 +114,22 @@ public class Comecocos extends Personaje {
         return punto;
     }
 
-    public void colision(Fantasma fantasma, Modelo modelo) {
+    public boolean colision(Fantasma fantasma, Modelo modelo) {
         boolean colision = false;
-        int vidas = modelo.getVidas();
-
+        int vidas = this.getVidas();
+        
         if (fantasma.getFila() == this.getFila() && fantasma.getColumna() == this.getColumna()) {
             colision = true;
+            
             vidas--;
-            modelo.setVidas(vidas);
-            if(vidas == 0){
-                modelo.salir();
-            }
-            else
-                modelo.start();
+            setVidas(vidas);
         }
         
-        if(colision){
+        if(colision || vidas == 0){
             vivo_ = false;
             notificarCambio();
-            
+            modelo.inicializarJuego();
         }
+        return colision;
     }
 }

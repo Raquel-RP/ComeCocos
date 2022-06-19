@@ -37,7 +37,7 @@ public class ComecocosFrame extends javax.swing.JFrame implements
     public void actualizarObservadorPersonaje() {
         this.getLaberintoPanel().repaint();
         jLabel2.setText(valueOf(modelo_.getPuntos()));
-        jLabel4.setText(valueOf(modelo_.getVidas()));
+        jLabel4.setText(valueOf(modelo_.getComecocos().getVidas()));
         
         if(modelo_.getPuntos() == 2620){
             jTextField1.setText("¡Máxima puntuación alcanzada!");

@@ -1,5 +1,6 @@
 package modelo;
 
+import static java.lang.String.valueOf;
 import java.util.ArrayList;
 
 /**
@@ -14,7 +15,6 @@ public class Modelo {
     private ArrayList<Fantasma> fantasmas_;
     private TareaAnimarPersonajes animadorPersonajes_;
     private int puntos_;
-    private int vidas_ = 3;
         
     public Modelo(){
         laberinto_ = new Laberinto();
@@ -49,14 +49,6 @@ public class Modelo {
         this.puntos_ = puntos;
     }
     
-    public int getVidas(){
-        return vidas_;
-    }
-    
-    public void setVidas(int vidas){
-        vidas_ = vidas;
-    }
-    
     public void inicializarJuego() {
         laberinto_.inicializar();
         comecocos_.inicializar(this);
@@ -69,10 +61,20 @@ public class Modelo {
         this.crearTareaLanzarHebraAnimarPersonajes();
     }
     
-    /*
+    
     public int colisionComecocosFantasma(){
-    //mejora de los fantasmas 
-    }*/
+        int colision = -1;//no colision
+        
+        for(int i=0; i<fantasmas_.size(); i++){
+            if(comecocos_.colision(getFantasma(i), this)){
+                colision = i;
+                this.inicializarJuego();
+            }
+        }
+        
+        return colision;
+    }
+    
     public void crearTareaLanzarHebraAnimarPersonajes() {
         if (animadorPersonajes_ != null) {
             animadorPersonajes_.terminar(); //TODO
