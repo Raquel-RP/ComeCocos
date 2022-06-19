@@ -11,5 +11,5 @@ Falta por hacer: por orden de prioridad
 - Casi hecho -> Terminar juego al comerse todos los cocos, falta implementar bien la salida del juego
 - Implementar movimiento de fantasmas, ya están dibujados e inicializados
 - HECHO -> Si fantasma te come fin del juego 
-- Vidas del comecocos
+- HECHO -> Vidas del comecocos
 - Puntuación final que depende del tiempo que hayas tardado y de los cocos comidos
