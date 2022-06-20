@@ -27,7 +27,7 @@ public class Fantasma extends Personaje {
     @Override
     public void inicializar(Modelo modelo) {
         //this.setColumnaFila(14,14);
-        //this.setDireccion(Direccion.NINGUNA);
+        this.setDireccion(Direccion.NINGUNA);
         // modelo.inicializarJuego();
     }
 
@@ -109,8 +109,8 @@ public class Fantasma extends Personaje {
     }
 
     /**
-     * Coge la casilla con menor distancia euclidea posible al comecocos No
-     * funciona bien
+     * Coge la casilla con menor distancia euclidea posible al comecocos 
+     * No funciona bien
      *
      * @param modelo
      * @return
