@@ -58,6 +58,7 @@ public class Comecocos extends Personaje {
             } else if (celda == Laberinto.TipoCelda.COCOGRANDE) {
                 modelo.getLaberinto().setCelda(sigPosicion.getX(), sigPosicion.getY(), Laberinto.TipoCelda.LIBRE);
                 puntos += 50;
+                //fantasma comestible un tiempo
             }
             /*
             iterar por modelo.fantasma y comprobar si están en la posición

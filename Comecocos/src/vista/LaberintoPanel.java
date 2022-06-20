@@ -38,7 +38,7 @@ public class LaberintoPanel extends javax.swing.JPanel {
         dibujarComecocos(g);
         dibujarFantasmas(g);
 
-        dibujarFantasmas(g);
+        //dibujarFantasmas(g);
     }
 
     private void dibujarLaberinto(Graphics g) {
