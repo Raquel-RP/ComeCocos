@@ -1,5 +1,6 @@
 package modelo;
 
+import java.util.Random;
 import vista.ObservadorPersonaje;
 
 /**
@@ -41,6 +42,17 @@ public abstract class Personaje {
 
     public void setDireccion(Direccion d) {
         this.direccion_ = d;
+    }
+    
+    /**
+     * 
+     * @param d Dirección que traía para no seguir en esa dirección
+     */
+    public void setDireccionAleatoria(Direccion d){
+        while(direccion_ == d){
+            int aleatorio = new Random().nextInt();
+            direccion_ = Direccion.values()[aleatorio];
+        }
     }
 
     public void registrarObservador(ObservadorPersonaje o) {
