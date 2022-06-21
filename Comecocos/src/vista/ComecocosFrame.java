@@ -5,34 +5,55 @@ import static java.lang.String.valueOf;
 import modelo.Modelo;
 
 /**
- *
+ * Extensión del JFrame que implementa las interfaces ObservadorLaberinto y
+ * ObservadorPersonaje para obtener una interfaz gráfica que controlará el usuario.
+ * 
  * @author Raquel Romero Pedraza
  * @author Raquel Pulido Pérez
  */
 public class ComecocosFrame extends javax.swing.JFrame implements
         ObservadorLaberinto, ObservadorPersonaje { //ComecocosFrame es observador de laberinto
 
-    private Modelo modelo_;
-    private Controlador controlador_;
+    private Modelo modelo_;//Referencia al objeto modelo
+    private Controlador controlador_;//Referencia al objeto controlador
 
+    /**
+     * Constructor por defecto que inicializa los componentes.
+     */
     public ComecocosFrame() {
         initComponents();
     }
 
+    /**
+     * Constructor de la clase ComecocosFrame con el paso de un objeto modelo y
+     * otro controlador, para inicializarlos y registrar el observador de los
+     * objetos del modelo; su interfaz gráfica permite el juego.
+     * 
+     * @param modelo        Objeto de la clase Modelo que referencia al modelo.
+     * @param controlador   Objeto de la clase Controlador que referencia al controlador.
+     */
     public ComecocosFrame(Modelo modelo, Controlador controlador) {
         this();
         modelo_ = modelo;
         controlador_ = controlador;
-        // Registros de observador de los objetos del modelo
-        modelo_.getLaberinto().registrarObservador(this); // observador de laberinto
-        modelo_.getComecocos().registrarObservador(this); // TODO registrarObservador
+        modelo_.getLaberinto().registrarObservador(this); //observador de laberinto
+        modelo_.getComecocos().registrarObservador(this); //registrarObservador personaje
     }
     
+    /**
+     * Implementa el cómo de actualizar el observadorLaberinto, volviendo a pintar
+     * los cambios del laberinto actualizados.
+     */
     @Override
     public void actualizarObservadorLaberinto() {
         this.getLaberintoPanel().repaint();
     }
 
+    /**
+     * Implementa la actualización del dibujo repintando los cambios que haya
+     * además de mostrar los textos de los puntos obtenidos y las vidas restantes,
+     * y el texto final de partida.
+     */
     @Override
     public void actualizarObservadorPersonaje() {
         this.getLaberintoPanel().repaint();
@@ -45,14 +66,31 @@ public class ComecocosFrame extends javax.swing.JFrame implements
         }
     }
     
+    /**
+     * Devuelve el modelo en el que se guardan los objetos de interés.
+     * 
+     * @return  modelo_, el modelo con los estados actuales de los objetos.
+     */
     public Modelo getModelo() {
         return modelo_;
     }
 
+    /**
+     * Devuelve el objeto controlador representante del intermediario entre
+     * la vista y el modelo.
+     * 
+     * @return controlador_, el objeto controlador intermediario entre la vista
+     * y el modelo
+     */
     public Controlador getControlador() {
         return controlador_;
     }
 
+    /**
+     * Devuelve el laberinto del panel del juego.
+     * 
+     * @return laberintoPanel1, el laberinto del panel del juego.
+     */
     public LaberintoPanel getLaberintoPanel() {
         return laberintoPanel1;
     }
@@ -336,18 +374,47 @@ public class ComecocosFrame extends javax.swing.JFrame implements
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
 
+    /**
+     * Para una acción procedente de un botón de la interfaz gráfica, ejecutará
+     * la salida del modelo del juego, terminando por tanto el mismo.
+     * 
+     * @param evt evento procedente de la acción sobre uno de los botones de la
+     *        interfaz.
+     */
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         modelo_.salir();
     }//GEN-LAST:event_jButton4ActionPerformed
 
+    /**
+     * Para una acción procedente de un botón de la interfaz gráfica, ejecutará
+     * la reanudación del modelo del juego, continuando por donde iba.
+     * 
+     * @param evt evento procedente de la acción sobre uno de los botones de la
+     *        interfaz.
+     */
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         modelo_.resume();
     }//GEN-LAST:event_jButton3ActionPerformed
 
+    /**
+     * Para una acción procedente de un botón de la interfaz gráfica, ejecutará
+     * la pausa del modelo del juego, congelando todos los elementos del modelo.
+     * 
+     * @param evt evento procedente de la acción sobre uno de los botones de la
+     *        interfaz.
+     */
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         modelo_.pausa();
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    /**
+     * Para una acción procedente de un botón de la interfaz gráfica, ejecutará
+     * el comienzo del modelo del juego, inicializándolo y desbloqueando el botón
+     * de resume que solo será accesible si el juego ha empezado.
+     * 
+     * @param evt evento procedente de la acción sobre uno de los botones de la
+     *        interfaz.
+     */
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         modelo_.start();
         jButton3.setVisible(true);
@@ -355,6 +422,10 @@ public class ComecocosFrame extends javax.swing.JFrame implements
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
+     * Programa principal de la vista que ejecuta un Runable con un nuevo
+     * objeto modelo (que crea al objeto laberinto, comecocos, fantasma...) y con
+     * un nuevo controlador del modelo, creando el objeto comecocosFrame.
+     * 
      * @param args the command line arguments
      */
     public static void main(String args[]) {
@@ -385,8 +456,8 @@ public class ComecocosFrame extends javax.swing.JFrame implements
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 //new ComecocosFrame().setVisible(true);
-                Modelo modelo = new Modelo(); // objeto modelo que crea el objeto laberinto, fantasma, ...
-                Controlador controlador = new Controlador(modelo); // objeto controlador, crea objeto comecocosFrame
+                Modelo modelo = new Modelo();
+                Controlador controlador = new Controlador(modelo);
             }
         });
     }
