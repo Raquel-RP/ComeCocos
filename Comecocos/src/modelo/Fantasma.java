@@ -27,7 +27,7 @@ public class Fantasma extends Personaje {
     @Override
     public void inicializar(Modelo modelo) {
         //this.setColumnaFila(14,14);
-        this.setDireccion(Direccion.NINGUNA);
+        //this.setDireccion(Direccion.NINGUNA);
         // modelo.inicializarJuego();
     }
 

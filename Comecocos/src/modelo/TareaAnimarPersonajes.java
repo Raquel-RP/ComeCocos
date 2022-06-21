@@ -31,7 +31,6 @@ public class TareaAnimarPersonajes implements Runnable {
                 // Mover también los fantasmas
                 
                 for (int i = 0; i < 4; i++) {
-                    modelo_.getFantasma(i).mover(modelo_);
                     //modelo_.getComecocos().colision(modelo_.getFantasma(i), modelo_);  // Comprueba colision antes de moverse por si el comecocos se ha movido donde esta el fantasma
                     //TODO implementar el mover fantasmas
                     //modelo_.getFantasma(i).mover(modelo_);
