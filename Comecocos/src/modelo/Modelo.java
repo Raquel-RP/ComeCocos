@@ -83,6 +83,7 @@ public class Modelo {
     }
     
     public void salir(){
+        this.animadorPersonajes_.terminar();
         System.exit(0);
     }
 }

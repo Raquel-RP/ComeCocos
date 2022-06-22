@@ -121,14 +121,15 @@ public class Comecocos extends Personaje {
         if (fantasma.getFila() == this.getFila() && fantasma.getColumna() == this.getColumna()) {
             vidas_--;
             System.out.println(vidas_);
+            
             if (vidas_ == 0) {
                 vivo_ = false;
                 notificarCambio();
                 modelo.pausa();
+                
             } else {
                 modelo.inicializarJuego();
             }
-            //setVidas(vidas_);
         }
     }
 }
