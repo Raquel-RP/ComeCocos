@@ -1,16 +1,23 @@
 package modelo;
 
 /**
- * Subclase de personaje
+ * Subclase de personaje que representa al comecocos definiendo su movimiento
+ * y estado.
  *
  * @author Raquel Romero
  * @author Raquel Pulido
  */
 public class Comecocos extends Personaje {
 
-    public boolean vivo_;
-    public int vidas_;
+    public boolean vivo_;//booleano que indica si tiene vidas restantes.
+    public int vidas_;//numero de vidas restantes del comecocos.
 
+    /**
+     * Constructor del comecocos que inicializa el comecocos del modelo en
+     * el que está representado.
+     * 
+     * @param modelo  Modelo en el que está representado el comecocos que se quiere inicializar.
+     */
     public Comecocos(Modelo modelo) {
 
         // para que sepa donde esta el centro hay que pasarle el modelo para
@@ -19,26 +26,41 @@ public class Comecocos extends Personaje {
         this.inicializar(modelo);
     }
 
+    /**
+     * Devuelve un booleano para indicar si el comecocos está vivo.
+     * 
+     * @return vivo_ es el booleano que indica si al comecocos le quedan vidas.
+     */
     public boolean isVivo() {
         return vivo_;
     }
 
+    /**
+     * Método de consulta del número de vidas restantes que le quedan al comecocos.
+     * 
+     * @return  vidas_: el numero de vidas restantes del comecocos.
+     */
     public int getVidas() {
         return vidas_;
     }
 
+    /**
+     * Establece el número entero que se le introduce como el número de vidas
+     * actual que le quedan al comecocos.
+     * 
+     * @param vidas: el numero de vidas que se quiere que le queden al comecocos.
+     */
     public void setVidas(int vidas) {
         vidas_ = vidas;
     }
    
     /**
-     * Comecocos preparado para moverse cuando llama a este metodo mira en que
-     * posicion esta el comecocos y calcular cual seria la siguiente celda en la
-     * que se movería (celda de arriba, de abajo o de al lado) dependiendo de la
-     * posicion actual y de la direccion de movimiento hacer metodo privado
-     * siguiente posición
+     * Método principal responsable del movimiento adecuado del comecocos
+     * comprobando la disponibilidad de la celda a la que quiere acceder en
+     * su siguiente movimiento.
      *
-     * @param modelo
+     * @param modelo    modelo en el que se encuentran los elementos del juego que
+     *                  pueden interferir en el movimiento del comecocos.
      */
     @Override
     public void mover(Modelo modelo) {
@@ -60,13 +82,8 @@ public class Comecocos extends Personaje {
                 puntos += 50;
                 //fantasma comestible un tiempo
             }
-            /*
-            iterar por modelo.fantasma y comprobar si están en la posición
-            si está en la posicion se reinicia perdiendo vida 
-            FANTASMA NO COMESTIBLE
-             */
         }
-        //Si llega al máximo de puntos
+        //Si llega al máximo de puntos tras comer todos los cocos.(no cuentan fantasmas)
         if (puntos == 2620) {
             modelo.setPuntos(puntos);
             notificarCambio();
@@ -77,6 +94,12 @@ public class Comecocos extends Personaje {
         }
     }
 
+    /**
+     * Inicializa el comecocos en una posición específica del laberinto.
+     * 
+     * @param modelo    modelo en el que se encuentran los datos del laberinto
+     *                  registrados y en el que se establecerá la posición del comecocos.
+     */
     @Override
     public void inicializar(Modelo modelo) {
         this.setColumnaFila(13, 17);
@@ -84,6 +107,14 @@ public class Comecocos extends Personaje {
         this.vivo_ = true;
     }
 
+    /**
+     * Calcula la posición del siguiente punto según la posición y el tamaño
+     * del laberinto, es un método auxiliar de mover() que cambia las coordenadas
+     * del comecocos según la dirección que vaya a tomar.
+     * 
+     * @return El punto en sus coordenadas x e y de la siguiente posición según
+     *         la dirección que lleva.
+     */
     private Punto siguientePosicion() {
 
         Punto punto;
@@ -116,6 +147,13 @@ public class Comecocos extends Personaje {
         return punto;
     }
 
+    /**
+     * Comprueba si hay colisión entre un fantasma y el comecocos comprobando
+     * que los dos acceden a la misma casilla del panel.
+     * 
+     * @param fantasma  Fantasma que se encuentra en una posición dada
+     * @param modelo    Modelo que contiene los datos para comprobar la colision
+     */
     public void colision(Fantasma fantasma, Modelo modelo) {
 
         if (fantasma.getFila() == this.getFila() && fantasma.getColumna() == this.getColumna()) {
