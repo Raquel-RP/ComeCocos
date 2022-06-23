@@ -1,25 +1,41 @@
 package modelo;
 
 /**
- * Hereda de personaje
+ * Hereda de personaje y representa al fantasma definiendo sus movimientos.
  *
  * @author Raquel Romero
  * @author Raquel Pulido
  */
 public class Fantasma extends Personaje {
 
+    /**
+     * Enumera los nombres de los fantasmas.
+     */
     public enum NombreFantasma {
         INKY, PINKY, BLINKY, CLYDE
     }
 
-    private NombreFantasma nombre_;
+    private NombreFantasma nombre_;//nombre del fantasma
 
+    /**
+     * Constructor del fantasma que lo inicializa en una posición dada y se le
+     * establece un nombre dado.
+     * 
+     * @param col    Columna de la posición en la que se quiere inicializar el fantasma
+     * @param fila   Fila de la posición en la que se quiere inicializar el fantasma
+     * @param nombre Nombre del fantasma que se quiere incializar en cierta posicion
+     */
     public Fantasma(int col, int fila, NombreFantasma nombre) {
         this.setColumnaFila(col, fila);
         this.nombre_ = nombre;
         this.setDireccion(Personaje.Direccion.NINGUNA);
     }
 
+    /**
+     * Método de consulta del nombre de un fantasma.
+     * 
+     * @return El nomnbre enumerado del fantasma.
+     */
     public NombreFantasma getNombre() {
         return nombre_;
     }
@@ -62,29 +78,7 @@ public class Fantasma extends Personaje {
         }
         //notificarCambio();
     }
-/*  //No funciona
-    private Punto siguientePosicionAleatoria() {
-        Punto p = new Punto(this.getColumna(), this.getFila());
-        Personaje.Direccion d = this.getDireccion();
-        this.setDireccionAleatoria(d);
-        switch (d) {
 
-            case IZQUIERDA:
-                p.setCoordenadas(p.getX() - 1, p.getY());
-                break;
-            case DERECHA:
-                p.setCoordenadas(p.getX() + 1, p.getY());
-                break;
-            case ARRIBA:
-                p.setCoordenadas(p.getX(), p.getY() - 1);
-                break;
-            case ABAJO:
-                p.setCoordenadas(p.getX(), p.getY() + 1);
-                break;
-        }
-        return p;
-    }
-    */
     private Punto siguientePosicion() { //preguntar si se puede poner en la superclase Personaje para no repetir 
 
         Punto p = new Punto(this.getColumna(), this.getFila());
