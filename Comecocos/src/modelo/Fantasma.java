@@ -47,7 +47,7 @@ public class Fantasma extends Personaje {
         // modelo.inicializarJuego();
     }
 
-    @Override
+   @Override
     public void mover(Modelo modelo) {
         Punto sigPosicion;
 
@@ -62,9 +62,11 @@ public class Fantasma extends Personaje {
                         this.setColumnaFila(sigPosicion.getX(), sigPosicion.getY());
                     }
                 } else {//Clyde, Inky
-
-                    //sigPosicion = siguientePosicionAleatoria();
+                    Personaje.Direccion d = this.getDireccion();
+                    this.setDireccionAleatoriaPosible(d, modelo);
+                    System.out.println("Direccion tomada: " + this.getDireccion());
                     sigPosicion = siguientePosicion();
+
                     if (modelo.getLaberinto().estaLibre(sigPosicion.getX(), sigPosicion.getY())) {
                         this.setColumnaFila(sigPosicion.getX(), sigPosicion.getY());
                     }
@@ -76,7 +78,7 @@ public class Fantasma extends Personaje {
                 }
             }
         }
-        //notificarCambio();
+        notificarCambio();
     }
 
     private Punto siguientePosicion() { //preguntar si se puede poner en la superclase Personaje para no repetir 
@@ -172,5 +174,54 @@ public class Fantasma extends Personaje {
             }
         }
         return mejorPunto;
+    }
+    
+        /**
+     * Proporciona una nueva dirección aleatoria dentro de las posibles 
+     * opciones que haya.
+     * 
+     * @param d Dirección que traía para no seguir en esa dirección
+     */
+    public void setDireccionAleatoriaPosible(Direccion d, Modelo modelo) {
+        ArrayList<Direccion> dirPosibles = new ArrayList();
+
+        dirPosibles = posiblesDirecciones(this.getColumna(), this.getFila(), modelo);
+        for(int i=0; i<dirPosibles.size(); i++){
+            System.out.println("Dir" + i + " " + dirPosibles.get(i));
+        }
+        if (dirPosibles.contains(d)) {
+            dirPosibles.remove(d);
+        }
+
+        int aleatorio = new Random().nextInt(dirPosibles.size());
+        this.setDireccion(dirPosibles.get(aleatorio));
+        System.out.println(this.getDireccion());
+    }
+
+    /**
+     * Añade las direcciones posibles que puede tomar en un cruce
+     *
+     * @param columna
+     * @param fila
+     * @param modelo
+     * @return
+     */
+    public ArrayList<Direccion> posiblesDirecciones(int columna, int fila, Modelo modelo) {
+        ArrayList<Direccion> direcciones = new ArrayList();
+
+        boolean izq = modelo.getLaberinto().estaLibre(columna - 1, fila);
+        boolean drcha = modelo.getLaberinto().estaLibre(columna + 1, fila);
+        boolean arriba = modelo.getLaberinto().estaLibre(columna, fila - 1);
+        boolean abajo = modelo.getLaberinto().estaLibre(columna, fila + 1);
+
+        boolean[] vLibre = {izq, drcha, arriba, abajo};
+        Direccion[] dirs = {Direccion.IZQUIERDA, Direccion.DERECHA, Direccion.ARRIBA, Direccion.ABAJO};
+               
+        for (int i = 0; i < 4; i++) {
+            if (vLibre[i]) {
+                direcciones.add(dirs[i]);
+            }
+        }
+        return direcciones;
     }
 }
