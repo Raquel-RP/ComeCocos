@@ -198,8 +198,8 @@ public class Laberinto {
         boolean cruce = false;
         int libres = 0;
         
-        boolean izq = estaLibre(columna - 1, fila);
-        boolean drcha = estaLibre(columna + 1, fila);
+        boolean izq = estaLibre((columna - 1 + 28) % 28, fila);
+        boolean drcha = estaLibre((columna + 1) % 28, fila);
         boolean arriba = estaLibre(columna, fila - 1);
         boolean abajo = estaLibre(columna, fila + 1);
         
@@ -210,7 +210,7 @@ public class Laberinto {
                 libres++;
         }
         cruce = libres > 2;
-        
+
         return cruce;
     } 
     
