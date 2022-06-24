@@ -38,6 +38,10 @@ public class ComecocosFrame extends javax.swing.JFrame implements
         controlador_ = controlador;
         modelo_.getLaberinto().registrarObservador(this); //observador de laberinto
         modelo_.getComecocos().registrarObservador(this); //registrarObservador personaje
+        //Registar observador para cada fantasma
+        for (int i = 0; i < 4; i++) {
+            modelo_.getFantasma(i).registrarObservador(this);
+        }
     }
     
     /**
