@@ -11,6 +11,9 @@ import java.util.Random;
  */
 public class Fantasma extends Personaje {
 
+    long time_start = 0, time_end = 0, time_limit;
+    boolean FirstTime = false;
+
     /**
      * Enumera los nombres de los fantasmas.
      */
@@ -35,6 +38,15 @@ public class Fantasma extends Personaje {
         this.setColumnaFila(col, fila);
         this.nombre_ = nombre;
         this.setDireccion(Personaje.Direccion.NINGUNA);
+        time_start = System.currentTimeMillis(); //Tiempo en el que empieza
+        
+        // Para que vayan saliendo de la cárcel escalonadamente
+        if(nombre == NombreFantasma.CLYDE)
+            time_limit = 6000;
+        else if(nombre == NombreFantasma.INKY)
+            time_limit = 13000;
+        else if(nombre == NombreFantasma.PINKY)
+            time_limit = 20000;
     }
 
     /**
@@ -53,13 +65,19 @@ public class Fantasma extends Personaje {
         // modelo.inicializarJuego();
     }
 
-    @Override
+        @Override
     public void mover(Modelo modelo) {
         Punto sigPosicion;
-        ArrayList<Direccion> dirPosibles;
+        time_end = System.currentTimeMillis();
+
+        if (!FirstTime && time_end - time_start >= time_limit) {
+            FirstTime = true;
+            modelo.sacarFantasma();
+            this.setColumnaFila(12, 11);
+        }
 
         if (modelo.getLaberinto().esCruce(this.getColumna(), this.getFila())) {
-            System.out.println("Es cruce");
+
             if (this.nombre_ == NombreFantasma.BLINKY || this.nombre_ == NombreFantasma.PINKY) {
                 sigPosicion = this.getCasillaPerseguir(modelo);
 
@@ -70,23 +88,32 @@ public class Fantasma extends Personaje {
                 Personaje.Direccion d = this.getDireccion();
                 this.setDireccionAleatoriaPosible(d, modelo);
                 sigPosicion = siguientePosicion();
-                System.out.println("Direccion: " + this.getDireccion());
 
                 if (modelo.getLaberinto().estaLibre(sigPosicion.getX(), sigPosicion.getY())) {
                     this.setColumnaFila(sigPosicion.getX(), sigPosicion.getY());
                 }
             }
         } else { //si no es cruce
-            dirPosibles = posiblesDirecciones(this.getColumna(), this.getFila(), modelo);
-            for (Direccion dir : dirPosibles) {
-                
-                if (dir != this.getDireccion()) {
-                    this.setDireccion(dir);
+
+            if (this.nombre_ == NombreFantasma.BLINKY || this.nombre_ == NombreFantasma.PINKY) {
+                sigPosicion = this.getCasillaPerseguir(modelo);
+
+                if (modelo.getLaberinto().estaLibre(sigPosicion.getX(), sigPosicion.getY())) {
+                    this.setColumnaFila(sigPosicion.getX(), sigPosicion.getY());
                 }
-            }
-            sigPosicion = siguientePosicion();
-            if (modelo.getLaberinto().estaLibre(sigPosicion.getX(), sigPosicion.getY())) {
-                this.setColumnaFila(sigPosicion.getX(), sigPosicion.getY());
+            } else {//Clyde, Inky
+                ArrayList<Direccion> dirPosibles;
+                dirPosibles = posiblesDirecciones(this.getColumna(), this.getFila(), modelo);
+                for (Direccion dir : dirPosibles) {
+
+                    if (dir != this.getDireccion()) {
+                        this.setDireccion(dir);
+                    }
+                }
+                sigPosicion = siguientePosicion();
+                if (modelo.getLaberinto().estaLibre(sigPosicion.getX(), sigPosicion.getY())) {
+                    this.setColumnaFila(sigPosicion.getX(), sigPosicion.getY());
+                }
             }
         }
         notificarCambio();
@@ -155,7 +182,8 @@ public class Fantasma extends Personaje {
                         mejorDistancia = mejorPunto.getDistanciaEuclidea(posComecocos);
                     }
                 }
-            } else if (laberinto.estaLibre(columna + 1, fila)) {
+            }
+            if (laberinto.estaLibre(columna + 1, fila)) {
                 if (mejorPunto == null) {
                     mejorPunto = new Punto(columna + 1, fila);
                     mejorDistancia = mejorPunto.getDistanciaEuclidea(posComecocos);
@@ -167,7 +195,8 @@ public class Fantasma extends Personaje {
 
                     }
                 }
-            } else if (laberinto.estaLibre(columna, fila + 1)) {
+            }
+            if (laberinto.estaLibre(columna, fila + 1)) {
                 if (mejorPunto == null) {
                     mejorPunto = new Punto(columna, fila + 1);
                     mejorDistancia = mejorPunto.getDistanciaEuclidea(posComecocos);
@@ -179,7 +208,8 @@ public class Fantasma extends Personaje {
 
                     }
                 }
-            } else if (laberinto.estaLibre(columna, fila - 1)) {
+            }
+            if (laberinto.estaLibre(columna, fila - 1)) {
                 if (mejorPunto == null) {
                     mejorPunto = new Punto(columna, fila - 1);
                     mejorDistancia = mejorPunto.getDistanciaEuclidea(posComecocos);
@@ -207,16 +237,13 @@ public class Fantasma extends Personaje {
         ArrayList<Direccion> dirPosibles;
 
         dirPosibles = posiblesDirecciones(this.getColumna(), this.getFila(), modelo);
-        for (int i = 0; i < dirPosibles.size(); i++) {
-            System.out.println("Dir" + i + " " + dirPosibles.get(i));
-        }
+
         if (dirPosibles.contains(d)) {
             dirPosibles.remove(d);
         }
-
+        
         int aleatorio = new Random().nextInt(dirPosibles.size());
         this.setDireccion(dirPosibles.get(aleatorio));
-        System.out.println(this.getDireccion());
     }
 
     /**

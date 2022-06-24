@@ -80,7 +80,6 @@ public class Comecocos extends Personaje {
             } else if (celda == Laberinto.TipoCelda.COCOGRANDE) {
                 modelo.getLaberinto().setCelda(sigPosicion.getX(), sigPosicion.getY(), Laberinto.TipoCelda.LIBRE);
                 puntos += 50;
-                //fantasma comestible un tiempo
             }
         }
         //Si llega al máximo de puntos tras comer todos los cocos.(no cuentan fantasmas)

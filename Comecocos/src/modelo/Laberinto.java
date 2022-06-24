@@ -5,7 +5,7 @@ import vista.ObservadorLaberinto;
 /**
  * Clase que representa el laberinto propio del juego y almacena el estado del
  * panel en todo momento.
- * 
+ *
  * @author Raquel Romero
  * @author Raquel Pulido
  */
@@ -72,10 +72,11 @@ public class Laberinto {
     /**
      * Método de consulta que devuelve el tipo de celda en una posición dada en
      * forma de columna y fila.
-     * 
-     * @param columna   Entero que representa la columna de busqueda de un tipo de celda
-     * @param fila      Entero de la fila de búsqueda de un tipo de celda.
-     * @return          El tipo de celda de una posición específica.
+     *
+     * @param columna Entero que representa la columna de busqueda de un tipo de
+     * celda
+     * @param fila Entero de la fila de búsqueda de un tipo de celda.
+     * @return El tipo de celda de una posición específica.
      */
     public TipoCelda getCelda(int columna, int fila) {
         return celdas_[columna][fila];
@@ -84,10 +85,10 @@ public class Laberinto {
     /**
      * Establece el tipo de celda para una posición dada de la matriz de celdas
      * y notifica el cambio una vez se actualiza la matriz.
-     * 
-     * @param columna   El entero de la columna de la celda que se establece.
-     * @param fila      El entero de la fila de la celda que se establece
-     * @param valor     Es el tipo de celda que se establece en la posición dicha.
+     *
+     * @param columna El entero de la columna de la celda que se establece.
+     * @param fila El entero de la fila de la celda que se establece
+     * @param valor Es el tipo de celda que se establece en la posición dicha.
      */
     public void setCelda(int columna, int fila, TipoCelda valor) {
         celdas_[columna][fila] = valor;
@@ -96,7 +97,7 @@ public class Laberinto {
 
     /**
      * Método de consulta del ancho del laberinto.
-     * 
+     *
      * @return el entero que representa el ancho del laberinto.
      */
     public int getAnchura() {
@@ -105,7 +106,7 @@ public class Laberinto {
 
     /**
      * Método de consulta del alto del laberinto.
-     * 
+     *
      * @return el entero que representa la altura del laberinto.
      */
     public int getAltura() {
@@ -153,20 +154,20 @@ public class Laberinto {
 
     /**
      * Registra el observador de laberinto en el dato miembro observador_.
-     * 
-     * @param o     Observador de laberinto que se quiere registrar.
+     *
+     * @param o Observador de laberinto que se quiere registrar.
      */
     public void registrarObservador(ObservadorLaberinto o) {
         observador_ = o;
     }
 
     /**
-     * Compueba si está libre o no la celda solicitada según sus componentes
-     * de columna y fila, es decir, comprueba que no sea bloque o puerta.
-     * 
-     * @param columna   número de la columna que se quiere comprobar
-     * @param fila      número de la fila que se quiere comprobar
-     * @return          un booleano que indica si la posición está libre
+     * Compueba si está libre o no la celda solicitada según sus componentes de
+     * columna y fila, es decir, comprueba que no sea bloque o puerta.
+     *
+     * @param columna número de la columna que se quiere comprobar
+     * @param fila número de la fila que se quiere comprobar
+     * @return un booleano que indica si la posición está libre
      */
     public boolean estaLibre(int columna, int fila) {
 
@@ -181,37 +182,41 @@ public class Laberinto {
     }
 
     /**
-     * Comprueba si la casilla de la posición dada es un cruce de caminos en 
-     * el que se encuentren más de una dirección posible o no.
-     * 
-     * @param columna   número de la columna que se quiere comprobar
-     * @param fila      número de la fila que se quiere comprobar
-     * @return          un booleano que indica si la posición está libre
-     */
-        /**
-     * Comprueba si es una intersección la casilla
-     * @param columna
-     * @param fila
-     * @return 
+     * Comprueba si la casilla de la posición dada es un cruce de caminos en el
+     * que se encuentren más de una dirección posible o no.
+     *
+     * @param columna número de la columna que se quiere comprobar
+     * @param fila número de la fila que se quiere comprobar
+     * @return un booleano que indica si la posición está libre
      */
     public boolean esCruce(int columna, int fila) {
         boolean cruce = false;
         int libres = 0;
-        
+
         boolean izq = estaLibre((columna - 1 + 28) % 28, fila);
         boolean drcha = estaLibre((columna + 1) % 28, fila);
         boolean arriba = estaLibre(columna, fila - 1);
         boolean abajo = estaLibre(columna, fila + 1);
-        
+
         boolean[] vLibre = {izq, drcha, arriba, abajo};
-               
+
         for (int i = 0; i < vLibre.length; i++) {
-            if (vLibre[i])
+            if (vLibre[i]) {
                 libres++;
+            }
         }
-        cruce = libres > 2;
+        
+        if (libres > 2) {
+            cruce = true;
+        } else {
+            if ((izq && drcha) || (arriba && abajo)) {
+                cruce = false;
+            } else {
+                cruce = true;
+            }
+        }
 
         return cruce;
-    } 
-    
+    }
+
 }

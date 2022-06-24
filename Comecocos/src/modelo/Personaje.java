@@ -80,30 +80,6 @@ public abstract class Personaje {
     }
     
     /**
-     * Establece una nueva dirección aleatoria de entre las posibles evitando
-     * la dirección opuesta a la que traía para que no se de la vuelta.
-     * 
-     * @param d Dirección que traía para evitar que se de la vuelta.
-     */
-    public void setDireccionAleatoria(Direccion d){
-        
-        while(direccion_ == d){
-            int aleatorio = new Random().nextInt();
-            direccion_ = Direccion.values()[aleatorio];
-            if((direccion_ == direccion_.DERECHA && d == direccion_.IZQUIERDA)||
-                    (direccion_ == direccion_.ARRIBA && d == direccion_.ABAJO)){
-                aleatorio = new Random().nextInt();
-                direccion_ = Direccion.values()[aleatorio];
-            }
-            else if ((direccion_ == direccion_.IZQUIERDA && d == direccion_.DERECHA)||
-                    (direccion_ == direccion_.ABAJO && d == direccion_.ARRIBA)){
-                aleatorio = new Random().nextInt();
-                direccion_ = Direccion.values()[aleatorio];
-            }
-        }
-    }
-
-    /**
      * Registra el observador del personaje.
      * 
      * @param o Observador del personaje que se quiere registrar.
