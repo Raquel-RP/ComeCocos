@@ -59,6 +59,7 @@ public class Fantasma extends Personaje {
         ArrayList<Direccion> dirPosibles;
 
         if (modelo.getLaberinto().esCruce(this.getColumna(), this.getFila())) {
+            System.out.println("Es cruce");
             if (this.nombre_ == NombreFantasma.BLINKY || this.nombre_ == NombreFantasma.PINKY) {
                 sigPosicion = this.getCasillaPerseguir(modelo);
 
@@ -69,6 +70,7 @@ public class Fantasma extends Personaje {
                 Personaje.Direccion d = this.getDireccion();
                 this.setDireccionAleatoriaPosible(d, modelo);
                 sigPosicion = siguientePosicion();
+                System.out.println("Direccion: " + this.getDireccion());
 
                 if (modelo.getLaberinto().estaLibre(sigPosicion.getX(), sigPosicion.getY())) {
                     this.setColumnaFila(sigPosicion.getX(), sigPosicion.getY());

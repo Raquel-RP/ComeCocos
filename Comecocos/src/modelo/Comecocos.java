@@ -165,7 +165,6 @@ public class Comecocos extends Personaje {
                 modelo.pausa();
                 
             } else {
-               // modelo.inicializarJuego();
                modelo.setPuntos(0);
                notificarCambio();
                modelo.getComecocos().inicializar(modelo);
