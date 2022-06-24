@@ -2,7 +2,7 @@
 Práctica 8 de las asignatura Complementos de Programación
 
 PROBLEMAS Y AVANCES MOVIMIENTO FANTASMAS:
-- Avance: se mueven los dos que tienen movimiento más sencillo. Se supone que lo hacen solo a las posibles ya.
+- Avance: se mueven los dos que tienen movimiento más sencillo. Se supone que lo hacen solo a las celdas posibles.
 - Poblemas: van muy rápido. Llegados a un punto no reconocen bien qué direcciones tiene que coger y terminan parando.
 - Implementar: al reiniciar el juego deben de reiniciarse también los fantasmas. Movimiento de los otros dos.
 
