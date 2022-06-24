@@ -11,7 +11,7 @@ import java.util.Random;
  */
 public class Fantasma extends Personaje {
 
-    long time_start = 0, time_end = 0, time_limit;
+    long time_inicio = 0, time_end = 0, time_limit;
     boolean FirstTime = false;
 
     /**
@@ -38,15 +38,16 @@ public class Fantasma extends Personaje {
         this.setColumnaFila(col, fila);
         this.nombre_ = nombre;
         this.setDireccion(Personaje.Direccion.NINGUNA);
-        time_start = System.currentTimeMillis(); //Tiempo en el que empieza
-        
-        // Para que vayan saliendo de la cárcel escalonadamente
-        if(nombre == NombreFantasma.CLYDE)
+        time_inicio = System.currentTimeMillis(); //Tiempo en el que empieza
+
+        // Para que vayan saliendo los fantasmas de la cárcel escalonadamente
+        if (nombre == NombreFantasma.CLYDE) {
             time_limit = 6000;
-        else if(nombre == NombreFantasma.INKY)
+        } else if (nombre == NombreFantasma.INKY) {
             time_limit = 13000;
-        else if(nombre == NombreFantasma.PINKY)
+        } else if (nombre == NombreFantasma.PINKY) {
             time_limit = 20000;
+        }
     }
 
     /**
@@ -60,17 +61,31 @@ public class Fantasma extends Personaje {
 
     @Override
     public void inicializar(Modelo modelo) {
+        switch (this.nombre_) {
+            case INKY:
+                this.setColumnaFila(14,14);
+                break;
+            case PINKY:
+                this.setColumnaFila(13,14);
+                break;
+            case BLINKY:
+                this.setColumnaFila(13,11);
+                break;
+            case CLYDE:
+                this.setColumnaFila(12,14);
+                break;
+        }
         //this.setColumnaFila(14,14);
         //this.setDireccion(Direccion.NINGUNA);
         // modelo.inicializarJuego();
     }
 
-        @Override
+    @Override
     public void mover(Modelo modelo) {
         Punto sigPosicion;
         time_end = System.currentTimeMillis();
 
-        if (!FirstTime && time_end - time_start >= time_limit) {
+        if (!FirstTime && time_end - time_inicio >= time_limit) {
             FirstTime = true;
             modelo.sacarFantasma();
             this.setColumnaFila(12, 11);
@@ -79,7 +94,7 @@ public class Fantasma extends Personaje {
         if (modelo.getLaberinto().esCruce(this.getColumna(), this.getFila())) {
 
             if (this.nombre_ == NombreFantasma.BLINKY || this.nombre_ == NombreFantasma.PINKY) {
-                sigPosicion = this.getCasillaPerseguir(modelo);
+                sigPosicion = this.getCeldaPerseguir(modelo);
 
                 if (modelo.getLaberinto().estaLibre(sigPosicion.getX(), sigPosicion.getY())) {
                     this.setColumnaFila(sigPosicion.getX(), sigPosicion.getY());
@@ -96,7 +111,7 @@ public class Fantasma extends Personaje {
         } else { //si no es cruce
 
             if (this.nombre_ == NombreFantasma.BLINKY || this.nombre_ == NombreFantasma.PINKY) {
-                sigPosicion = this.getCasillaPerseguir(modelo);
+                sigPosicion = this.getCeldaPerseguir(modelo);
 
                 if (modelo.getLaberinto().estaLibre(sigPosicion.getX(), sigPosicion.getY())) {
                     this.setColumnaFila(sigPosicion.getX(), sigPosicion.getY());
@@ -153,77 +168,73 @@ public class Fantasma extends Personaje {
 
     /**
      * Coge la casilla con menor distancia euclidea posible al comecocos No
-     * funciona bien
+     * funciona bien. Comprueba por todas las posibles casillas libres cuál
+     * tiene la mejor distancia al comecocos.
      *
      * @param modelo
      * @return
      */
-    private Punto getCasillaPerseguir(Modelo modelo) {
+    private Punto getCeldaPerseguir(Modelo modelo) {
+        double mejorDistancia = 0;
+        Punto mejorCelda = null;
 
         Punto posActual = new Punto(this.getColumna(), this.getFila());
         Punto posComecocos = new Punto(modelo.getComecocos().getColumna(), modelo.getComecocos().getFila());
-        double mejorDistancia = 0;
-        Punto mejorPunto = null;
 
-        int columna = this.getColumna();
-        int fila = this.getFila();
+        if (modelo.getLaberinto().estaLibre(this.getColumna(), this.getFila())) {
 
-        Laberinto laberinto = modelo.getLaberinto();
-
-        if (laberinto.estaLibre(this.getColumna(), this.getFila())) {
-            if (laberinto.estaLibre(columna - 1, fila)) {
-                if (mejorPunto == null) {
-                    mejorPunto = new Punto(columna - 1, fila);
-                    mejorDistancia = mejorPunto.getDistanciaEuclidea(posComecocos);
+            //IZQUIERDA
+            if (modelo.getLaberinto().estaLibre((this.getColumna() - 1 + 28) % 28, this.getFila())) {
+                if (mejorCelda == null) {
+                    mejorCelda = new Punto((this.getColumna() - 1 + 28) % 28, this.getFila());
+                    mejorDistancia = mejorCelda.getDistanciaEuclidea(posComecocos);
                 } else {
                     if (posActual.getDistanciaEuclidea(posComecocos) < mejorDistancia) {
-
-                        mejorPunto = new Punto(columna - 1, fila);
-                        mejorDistancia = mejorPunto.getDistanciaEuclidea(posComecocos);
+                        mejorCelda = new Punto((this.getColumna() - 1 + 28) % 28, this.getFila());
+                        mejorDistancia = mejorCelda.getDistanciaEuclidea(posComecocos);
                     }
                 }
             }
-            if (laberinto.estaLibre(columna + 1, fila)) {
-                if (mejorPunto == null) {
-                    mejorPunto = new Punto(columna + 1, fila);
-                    mejorDistancia = mejorPunto.getDistanciaEuclidea(posComecocos);
+            //DERECHA
+            if (modelo.getLaberinto().estaLibre((this.getColumna() + 1) % 28, this.getFila())) {
+                if (mejorCelda == null) {
+                    mejorCelda = new Punto((this.getColumna() + 1) % 28, this.getFila());
+                    mejorDistancia = mejorCelda.getDistanciaEuclidea(posComecocos);
                 } else {
                     if (posActual.getDistanciaEuclidea(posComecocos) < mejorDistancia) {
-
-                        mejorPunto = new Punto(columna + 1, fila);
-                        mejorDistancia = mejorPunto.getDistanciaEuclidea(posComecocos);
-
+                        mejorCelda = new Punto((this.getColumna() + 1) % 28, this.getFila());
+                        mejorDistancia = mejorCelda.getDistanciaEuclidea(posComecocos);
                     }
                 }
             }
-            if (laberinto.estaLibre(columna, fila + 1)) {
-                if (mejorPunto == null) {
-                    mejorPunto = new Punto(columna, fila + 1);
-                    mejorDistancia = mejorPunto.getDistanciaEuclidea(posComecocos);
+            //ARRIBA
+            if (modelo.getLaberinto().estaLibre(this.getColumna(), this.getFila() + 1)) {
+                if (mejorCelda == null) {
+                    mejorCelda = new Punto(this.getColumna(), this.getFila() + 1);
+                    mejorDistancia = mejorCelda.getDistanciaEuclidea(posComecocos);
                 } else {
                     if (posActual.getDistanciaEuclidea(posComecocos) < mejorDistancia) {
-
-                        mejorPunto = new Punto(columna, fila + 1);
-                        mejorDistancia = mejorPunto.getDistanciaEuclidea(posComecocos);
+                        mejorCelda = new Punto(this.getColumna(), this.getFila() + 1);
+                        mejorDistancia = mejorCelda.getDistanciaEuclidea(posComecocos);
 
                     }
                 }
             }
-            if (laberinto.estaLibre(columna, fila - 1)) {
-                if (mejorPunto == null) {
-                    mejorPunto = new Punto(columna, fila - 1);
-                    mejorDistancia = mejorPunto.getDistanciaEuclidea(posComecocos);
+            //ABAJO
+            if (modelo.getLaberinto().estaLibre(this.getColumna(), this.getFila() - 1)) {
+                if (mejorCelda == null) {
+                    mejorCelda = new Punto(this.getColumna(), this.getFila() - 1);
+                    mejorDistancia = mejorCelda.getDistanciaEuclidea(posComecocos);
                 } else {
                     if (posActual.getDistanciaEuclidea(posComecocos) < mejorDistancia) {
-
-                        mejorPunto = new Punto(columna, fila - 1);
-                        mejorDistancia = mejorPunto.getDistanciaEuclidea(posComecocos);
+                        mejorCelda = new Punto(this.getColumna(), this.getFila() - 1);
+                        mejorDistancia = mejorCelda.getDistanciaEuclidea(posComecocos);
 
                     }
                 }
             }
         }
-        return mejorPunto;
+        return mejorCelda;
     }
 
     /**
@@ -241,7 +252,7 @@ public class Fantasma extends Personaje {
         if (dirPosibles.contains(d)) {
             dirPosibles.remove(d);
         }
-        
+
         int aleatorio = new Random().nextInt(dirPosibles.size());
         this.setDireccion(dirPosibles.get(aleatorio));
     }

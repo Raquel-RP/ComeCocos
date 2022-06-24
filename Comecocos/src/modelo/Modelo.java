@@ -28,14 +28,9 @@ public class Modelo {
         fantasmas_ = new ArrayList();
 
         fantasmas_.add(new Fantasma(14, 14, Fantasma.NombreFantasma.INKY));
-        //fantasmas_.add(new Fantasma(17, 17, Fantasma.NombreFantasma.INKY));
         fantasmas_.add(new Fantasma(13, 14, Fantasma.NombreFantasma.PINKY));
         fantasmas_.add(new Fantasma(13, 11, Fantasma.NombreFantasma.BLINKY));
         fantasmas_.add(new Fantasma(12, 14, Fantasma.NombreFantasma.CLYDE));
-        //fantasmas_.add(new Fantasma(14, 11, Fantasma.NombreFantasma.CLYDE));
-
-        fantasmas_.get(0).setDireccion(Personaje.Direccion.IZQUIERDA);
-        fantasmas_.get(3).setDireccion(Personaje.Direccion.DERECHA);
 
         puntos_ = 0;
     }

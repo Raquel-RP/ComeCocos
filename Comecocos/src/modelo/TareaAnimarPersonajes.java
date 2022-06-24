@@ -13,7 +13,7 @@ public class TareaAnimarPersonajes implements Runnable {
     private int delay_;//retraso del tiempo para controlar la rapidez de movimiento de la hebras
     private boolean continuar_;//true mientras sigue iterando
     private boolean suspendFlag_;//para detener la hebra momentaneamente
-    long time_start = 0, time_end = 0;
+    long time_inicio = 0, time_final = 0;
 
     /**
      * Constructor de la clase TareaAnimarPersonajes que toma el modelo de
