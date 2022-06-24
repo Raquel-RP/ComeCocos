@@ -1,5 +1,8 @@
 package modelo;
 
+import java.util.ArrayList;
+import java.util.Random;
+
 /**
  * Hereda de personaje y representa al fantasma definiendo sus movimientos.
  *
@@ -81,27 +84,36 @@ public class Fantasma extends Personaje {
         notificarCambio();
     }
 
-    private Punto siguientePosicion() { //preguntar si se puede poner en la superclase Personaje para no repetir 
+    private Punto siguientePosicion() {
 
-        Punto p = new Punto(this.getColumna(), this.getFila());
-        Personaje.Direccion d = this.getDireccion();
+        Punto punto;
+        punto = new Punto();
 
-        switch (d) {
+        int x, y;
+        x = this.getColumna();
+        y = this.getFila();
+
+        switch (this.getDireccion()) {
 
             case IZQUIERDA:
-                p.setCoordenadas(p.getX() - 1, p.getY());
+                if (x == 0) {
+                    x = 27;
+                } else {
+                    x--;
+                }
                 break;
             case DERECHA:
-                p.setCoordenadas(p.getX() + 1, p.getY());
+                x = (x + 1) % 28; // Longitud del laberinto
                 break;
             case ARRIBA:
-                p.setCoordenadas(p.getX(), p.getY() - 1);
+                y--;
                 break;
             case ABAJO:
-                p.setCoordenadas(p.getX(), p.getY() + 1);
+                y++;
                 break;
         }
-        return p;
+        punto.setCoordenadas(x, y);
+        return punto;
     }
 
     /**
@@ -176,14 +188,14 @@ public class Fantasma extends Personaje {
         return mejorPunto;
     }
     
-        /**
+    /**
      * Proporciona una nueva dirección aleatoria dentro de las posibles 
      * opciones que haya.
-     * 
-     * @param d Dirección que traía para no seguir en esa dirección
+     * @param d
+     * @param modelo 
      */
     public void setDireccionAleatoriaPosible(Direccion d, Modelo modelo) {
-        ArrayList<Direccion> dirPosibles = new ArrayList();
+        ArrayList<Direccion> dirPosibles;
 
         dirPosibles = posiblesDirecciones(this.getColumna(), this.getFila(), modelo);
         for(int i=0; i<dirPosibles.size(); i++){

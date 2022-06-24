@@ -3,7 +3,7 @@ package modelo;
 /**
  * Clase con la que se pone en marcha el funcionamiento del comecocos mediante
  * la interfaz Runnable.
- * 
+ *
  * @author Raquel Romero
  * @author Raquel Pulido
  */
@@ -15,9 +15,9 @@ public class TareaAnimarPersonajes implements Runnable {
     private boolean suspendFlag_;//para detener la hebra momentaneamente
 
     /**
-     * Constructor de la clase TareaAnimarPersonajes que toma el modelo de entrada
-     * y le da valor de inicio a las variables de control de la hebra.
-     * 
+     * Constructor de la clase TareaAnimarPersonajes que toma el modelo de
+     * entrada y le da valor de inicio a las variables de control de la hebra.
+     *
      * @param modelo Objeto modelo del juego iniciado.
      */
     public TareaAnimarPersonajes(Modelo modelo) {
@@ -28,8 +28,8 @@ public class TareaAnimarPersonajes implements Runnable {
     }
 
     /**
-     * Controla la hebra del movimiento de los personajes y ejecuta el método run
-     * de runnable, controlando también los casos en los que pause o se pare
+     * Controla la hebra del movimiento de los personajes y ejecuta el método
+     * run de runnable, controlando también los casos en los que pause o se pare
      * el juego.
      */
     public void run() {
@@ -41,10 +41,12 @@ public class TareaAnimarPersonajes implements Runnable {
                     }
                 }
                 modelo_.getComecocos().mover(modelo_);
-                
-                for (int i = 0; i < 4; i++) {
-                    modelo_.getFantasma(i).mover(modelo_);
-                    modelo_.getComecocos().colision(modelo_.getFantasma(i), modelo_);  // Comprueba colision por si el fantasma se ha movido donde el comecocos
+
+                if (modelo_.getComecocos().getDireccion() != Personaje.Direccion.NINGUNA) {
+                    for (int i = 0; i < 4; i++) {
+                        modelo_.getFantasma(i).mover(modelo_);
+                        modelo_.getComecocos().colision(modelo_.getFantasma(i), modelo_);  // Comprueba colision por si el fantasma se ha movido donde el comecocos
+                    }
                 }
                 Thread.sleep(delay_); //Para la velocidad del juego
             } // end while
@@ -53,8 +55,8 @@ public class TareaAnimarPersonajes implements Runnable {
     }
 
     /**
-     * Provoca una pausa en el juego mediante la suspensión temporal con el
-     * dato miembro suspendFlag_.
+     * Provoca una pausa en el juego mediante la suspensión temporal con el dato
+     * miembro suspendFlag_.
      */
     public void pausa() {
         suspendFlag_ = true;
