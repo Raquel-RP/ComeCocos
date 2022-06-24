@@ -188,8 +188,15 @@ public class Laberinto {
      * @param fila      número de la fila que se quiere comprobar
      * @return          un booleano que indica si la posición está libre
      */
+        /**
+     * Comprueba si es una intersección la casilla
+     * @param columna
+     * @param fila
+     * @return 
+     */
     public boolean esCruce(int columna, int fila) {
         boolean cruce = false;
+        int libres = 0;
         
         boolean izq = estaLibre(columna - 1, fila);
         boolean drcha = estaLibre(columna + 1, fila);
@@ -197,16 +204,14 @@ public class Laberinto {
         boolean abajo = estaLibre(columna, fila + 1);
         
         boolean[] vLibre = {izq, drcha, arriba, abajo};
-        
-        int cuenta = 0;
-        
+               
         for (int i = 0; i < vLibre.length; i++) {
             if (vLibre[i])
-                cuenta++;
+                libres++;
         }
-        cruce = cuenta > 2;
+        cruce = libres > 2;
         
         return cruce;
-    }
+    } 
     
 }
