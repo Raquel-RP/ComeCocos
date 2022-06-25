@@ -11,7 +11,7 @@ import java.util.Random;
  */
 public class Fantasma extends Personaje {
 
-    long time_end = 0, time_limit;
+    long time_end, time_limit;
     boolean FirstTime = false;
 
     /**
