@@ -312,16 +312,16 @@ public class Fantasma extends Personaje {
 
         
         if(d.equals(Direccion.IZQUIERDA)){
-                drcha=false;
+            drcha=false;
         }
         if(d.equals(Direccion.DERECHA)){
-                izq=false;
+           izq=false;
         }
         if(d.equals(Direccion.ARRIBA)){
-                abajo=false;
+           abajo=false;
         }
         if(d.equals(Direccion.ABAJO)){
-                arriba=false;
+           arriba=false;
         }
         
         for (int i = 0; i < 4; i++) {
