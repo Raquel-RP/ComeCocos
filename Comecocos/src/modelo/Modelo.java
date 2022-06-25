@@ -16,6 +16,7 @@ public class Modelo {
     private ArrayList<Fantasma> fantasmas_;
     private TareaAnimarPersonajes animadorPersonajes_;
     private int puntos_;
+    long time_inicio;
 
     /**
      * Método constructor sin parámetros que crea los objetos Laberinto,
@@ -33,6 +34,8 @@ public class Modelo {
         fantasmas_.add(new Fantasma(12, 14, Fantasma.NombreFantasma.CLYDE));
 
         puntos_ = 0;
+        time_inicio = System.currentTimeMillis(); //Tiempo en el que empieza
+
     }
 
     /**
@@ -94,6 +97,7 @@ public class Modelo {
         laberinto_.inicializar();
         comecocos_.inicializar(this);
         this.setPuntos(0);
+        time_inicio = System.currentTimeMillis();
 
         for (int i = 0; i < fantasmas_.size(); i++) {
             this.getFantasma(i).inicializar(this);
@@ -150,8 +154,8 @@ public class Modelo {
     }
 
     /**
-     * Saca a los fantasmas de la cárcel y los coloca fuera
-     * en una posición concreta.
+     * Saca a los fantasmas inicializados en la cárcel y los coloca fuera
+     * en una posición concreta del laberinto para que sepan moverse correctamente.
      */
     public void sacarFantasma() {
         fantasmas_.add(new Fantasma(17, 17, Fantasma.NombreFantasma.PINKY));

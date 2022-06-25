@@ -208,7 +208,7 @@ public class Laberinto {
         
         if (libres > 2) {
             cruce = true;
-        } else {
+        } else {//para el caso que no sea cruce pero no pueda seguir recto
             if ((izq && drcha) || (arriba && abajo)) {
                 cruce = false;
             } else {

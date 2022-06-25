@@ -94,7 +94,7 @@ public abstract class Personaje {
     public void notificarCambio() {
         observador_.actualizarObservadorPersonaje();
     }
-
+    
     /**
      * Método abstracto que inicializa cada personaje del modelo dado.
      * 

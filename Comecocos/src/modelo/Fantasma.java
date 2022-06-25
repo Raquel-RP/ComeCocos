@@ -11,7 +11,7 @@ import java.util.Random;
  */
 public class Fantasma extends Personaje {
 
-    long time_inicio = 0, time_end = 0, time_limit;
+    long time_end = 0, time_limit;
     boolean FirstTime = false;
 
     /**
@@ -25,7 +25,8 @@ public class Fantasma extends Personaje {
 
     /**
      * Constructor del fantasma que lo inicializa en una posición dada y se le
-     * establece un nombre dado.
+     * establece un nombre dado, además de contar el tiempo máximo que se
+     * mantendrán cada uno dentro de la jaula.
      *
      * @param col Columna de la posición en la que se quiere inicializar el
      * fantasma
@@ -38,7 +39,7 @@ public class Fantasma extends Personaje {
         this.setColumnaFila(col, fila);
         this.nombre_ = nombre;
         this.setDireccion(Personaje.Direccion.NINGUNA);
-        time_inicio = System.currentTimeMillis(); //Tiempo en el que empieza
+        //time_inicio = System.currentTimeMillis(); //Tiempo en el que empieza
 
         // Para que vayan saliendo los fantasmas de la cárcel escalonadamente
         if (nombre == NombreFantasma.CLYDE) {
@@ -59,6 +60,13 @@ public class Fantasma extends Personaje {
         return nombre_;
     }
 
+    /**
+     * Inicializa los fantasmas del modelo estableciendo a cada uno de los
+     * fantasmas una columna y fila específicos.
+     * 
+     * @param modelo:   Modelo en el que se representan los fantasmas que se
+     *                  quieren iniciar
+     */
     @Override
     public void inicializar(Modelo modelo) {
         switch (this.nombre_) {
@@ -80,12 +88,21 @@ public class Fantasma extends Personaje {
         // modelo.inicializarJuego();
     }
 
+    /**
+     * Método principal responsable del movimiento adecuado del fantasma
+     * comprobando la disponibilidad de la celda a la que quiere acceder en
+     * su siguiente movimiento y estableciendo la dirección correcta, responsable
+     * de sacar los fantasmas inicializados en la jaula.
+     *
+     * @param modelo    modelo en el que se encuentran los elementos del juego que
+     *                  pueden interferir en el movimiento del fantasma.
+     */
     @Override
     public void mover(Modelo modelo) {
         Punto sigPosicion;
         time_end = System.currentTimeMillis();
 
-        if (!FirstTime && time_end - time_inicio >= time_limit) {
+        if (!FirstTime && time_end - modelo.time_inicio >= time_limit) {
             FirstTime = true;
             modelo.sacarFantasma();
             this.setColumnaFila(12, 11);
@@ -118,7 +135,7 @@ public class Fantasma extends Personaje {
                 }
             } else {//Clyde, Inky
                 ArrayList<Direccion> dirPosibles;
-                dirPosibles = posiblesDirecciones(this.getColumna(), this.getFila(), modelo);
+                dirPosibles = posiblesDirecciones(this.getColumna(), this.getFila(), modelo, this.getDireccion());
                 for (Direccion dir : dirPosibles) {
 
                     if (dir != this.getDireccion()) {
@@ -134,6 +151,15 @@ public class Fantasma extends Personaje {
         notificarCambio();
     }
 
+    /**
+     * Calcula la posición del siguiente punto según la posición y el tamaño
+     * del laberinto, es un método auxiliar de mover() que cambia las coordenadas
+     * del fantasma según la dirección que vaya a tomar.
+     * 
+     * @return El punto en sus coordenadas x e y de la siguiente posición según
+     *         la dirección que lleva.
+     */
+    
     private Punto siguientePosicion() {
 
         Punto punto;
@@ -165,14 +191,17 @@ public class Fantasma extends Personaje {
         punto.setCoordenadas(x, y);
         return punto;
     }
+    
 
     /**
-     * Coge la casilla con menor distancia euclidea posible al comecocos No
-     * funciona bien. Comprueba por todas las posibles casillas libres cuál
-     * tiene la mejor distancia al comecocos.
+     * Coge la casilla con menor distancia euclidea posible al comecocos 
+     * comprobando por todas las posibles casillas libres cuál tiene la menor
+     * distancia al comecocos.
      *
-     * @param modelo
-     * @return
+     * @param modelo: modelo en el que se encuentran los estados del laberinto
+     *              del juego y la posicion del comecocos que se quiere seguir
+     * @return mejorCelda: la celda que representa la más cercana según la
+     *                  distancia euclídea entre comecocos y fantasma.
      */
     private Punto getCeldaPerseguir(Modelo modelo) {
         double mejorDistancia = 0;
@@ -241,31 +270,36 @@ public class Fantasma extends Personaje {
      * Proporciona una nueva dirección aleatoria dentro de las posibles opciones
      * que haya.
      *
-     * @param d
-     * @param modelo
+     * @param d         direccion inicial que lleva el fantasma.
+     * @param modelo    modelo en el que se encuentran almacenados los datos del juego
      */
     public void setDireccionAleatoriaPosible(Direccion d, Modelo modelo) {
         ArrayList<Direccion> dirPosibles;
 
-        dirPosibles = posiblesDirecciones(this.getColumna(), this.getFila(), modelo);
+        dirPosibles = posiblesDirecciones(this.getColumna(), this.getFila(), modelo, d);
 
+        
         if (dirPosibles.contains(d)) {
             dirPosibles.remove(d);
         }
-
+        //System.out.println(dirPosibles);
         int aleatorio = new Random().nextInt(dirPosibles.size());
         this.setDireccion(dirPosibles.get(aleatorio));
     }
 
     /**
-     * Añade las direcciones posibles que puede tomar en un cruce
+     * Añade las direcciones posibles que puede tomar en un cruce evitando que
+     * tome la direccion por la que venía
      *
-     * @param columna
-     * @param fila
-     * @param modelo
-     * @return
+     * @param columna   columna de la posicion en la que se encuentra el fantasma
+     * @param fila      fila de la posicion en la que se encuentra el fantasma
+     * @param modelo    modelo con los datos del laberinto del cual queremos obtener
+     *                  si las posiciones contiguas de la actual están disponibles.
+     * @param d         direccion que trae el fantasma hasta llegar a la posicion actual.
+     * @return          un ArrayList con las posibles direcciones que puede tomar
+     *                  el fantasma según la posición en la que se encuentre.
      */
-    public ArrayList<Direccion> posiblesDirecciones(int columna, int fila, Modelo modelo) {
+    public ArrayList<Direccion> posiblesDirecciones(int columna, int fila, Modelo modelo, Direccion d) {
         ArrayList<Direccion> direcciones = new ArrayList();
 
         boolean izq = modelo.getLaberinto().estaLibre((columna - 1 + 28) % 28, fila);
@@ -276,6 +310,20 @@ public class Fantasma extends Personaje {
         boolean[] vLibre = {izq, drcha, arriba, abajo};
         Direccion[] dirs = {Direccion.IZQUIERDA, Direccion.DERECHA, Direccion.ARRIBA, Direccion.ABAJO};
 
+        
+        if(d.equals(Direccion.IZQUIERDA)){
+                drcha=false;
+        }
+        if(d.equals(Direccion.DERECHA)){
+                izq=false;
+        }
+        if(d.equals(Direccion.ARRIBA)){
+                abajo=false;
+        }
+        if(d.equals(Direccion.ABAJO)){
+                arriba=false;
+        }
+        
         for (int i = 0; i < 4; i++) {
             if (vLibre[i]) {
                 direcciones.add(dirs[i]);
