@@ -39,7 +39,6 @@ public class Fantasma extends Personaje {
         this.setColumnaFila(col, fila);
         this.nombre_ = nombre;
         this.setDireccion(Personaje.Direccion.NINGUNA);
-        //time_inicio = System.currentTimeMillis(); //Tiempo en el que empieza
 
         // Para que vayan saliendo los fantasmas de la cárcel escalonadamente
         if (nombre == NombreFantasma.CLYDE) {
@@ -83,9 +82,6 @@ public class Fantasma extends Personaje {
                 this.setColumnaFila(12,14);
                 break;
         }
-        //this.setColumnaFila(14,14);
-        //this.setDireccion(Direccion.NINGUNA);
-        // modelo.inicializarJuego();
     }
 
     /**
@@ -245,7 +241,6 @@ public class Fantasma extends Personaje {
                     if (posActual.getDistanciaEuclidea(posComecocos) < mejorDistancia) {
                         mejorCelda = new Punto(this.getColumna(), this.getFila() + 1);
                         mejorDistancia = mejorCelda.getDistanciaEuclidea(posComecocos);
-
                     }
                 }
             }
@@ -278,11 +273,10 @@ public class Fantasma extends Personaje {
 
         dirPosibles = posiblesDirecciones(this.getColumna(), this.getFila(), modelo, d);
 
-        
         if (dirPosibles.contains(d)) {
             dirPosibles.remove(d);
         }
-        //System.out.println(dirPosibles);
+
         int aleatorio = new Random().nextInt(dirPosibles.size());
         this.setDireccion(dirPosibles.get(aleatorio));
     }
@@ -309,19 +303,18 @@ public class Fantasma extends Personaje {
 
         boolean[] vLibre = {izq, drcha, arriba, abajo};
         Direccion[] dirs = {Direccion.IZQUIERDA, Direccion.DERECHA, Direccion.ARRIBA, Direccion.ABAJO};
-
         
         if(d.equals(Direccion.IZQUIERDA)){
-            drcha=false;
+            drcha = false;
         }
         if(d.equals(Direccion.DERECHA)){
-           izq=false;
+           izq = false;
         }
         if(d.equals(Direccion.ARRIBA)){
-           abajo=false;
+           abajo = false;
         }
         if(d.equals(Direccion.ABAJO)){
-           arriba=false;
+           arriba = false;
         }
         
         for (int i = 0; i < 4; i++) {
