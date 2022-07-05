@@ -22,23 +22,23 @@ Simulation of the PacMan Game made for a university project
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <a href="https://github.com/Raquel-RP/images/pacmanlogo.jpg">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
+  <a href="https://github.com/Raquel-RP/ComeCocos">
+    <img src="images/pacmanlogo.jpg" alt="Logo" width="80" height="80">
   </a>
 
-  <h3 align="center">Best-README-Template</h3>
+  <h3 align="center">Pac-Man</h3>
 
   <p align="center">
-    An awesome README template to jumpstart your projects!
+    A simulation of a simple version of the Pac-Man game for a college project.
     <br />
-    <a href="https://github.com/othneildrew/Best-README-Template"><strong>Explore the docs »</strong></a>
+    <a href="https://github.com/Raquel-RP/ComeCocos"><strong>Explore the project »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/othneildrew/Best-README-Template">View Demo</a>
+    <a href="https://github.com/Raquel-RP/ComeCocos">View Demo</a>
     ·
-    <a href="https://github.com/othneildrew/Best-README-Template/issues">Report Bug</a>
+    <a href="https://github.com/Raquel-RP/ComeCocos/issues">Report Bug</a>
     ·
-    <a href="https://github.com/othneildrew/Best-README-Template/issues">Request Feature</a>
+    <a href="https://github.com/Raquel-RP/ComeCocos/issues">Request Feature</a>
   </p>
 </div>
 
@@ -77,11 +77,15 @@ Simulation of the PacMan Game made for a university project
 
 [![Product Name Screen Shot][product-screenshot]](https://example.com)
 
-There are many great README templates available on GitHub; however, I didn't find one that really suited my needs so I created this enhanced one. I want to create a README template so amazing that it'll be the last one you ever need -- I think this is it.
+<img src="images/interface.jpg" alt="Interface" width="100" height="100">
 
-Here's why:
-* Your time should be focused on creating something amazing. A project that solves a problem and helps others
-* You shouldn't be doing the same tasks over and over like creating a README from scratch
+The project is the first to get me in touch with Java interfaces and the use of JPanel forms.
+The main goal was making a functional and playable game such as PacMan. It is also the first time
+using Threads in programming. 
+
+The main functions the game has are:
+* Being able to play a game with the options: start, pause, resume and exit
+* Gaining points depending on the type of 
 * You should implement DRY principles to the rest of your life :smile:
 
 Of course, no one template will serve all projects since your needs may be different. So I'll be adding more in the near future. You may also suggest changes by forking this repo and creating a pull request or opening an issue. Thanks to all the people have contributed to expanding this template!
