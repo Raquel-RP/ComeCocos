@@ -6,8 +6,9 @@ import modelo.Modelo;
 
 /**
  * Extensión del JFrame que implementa las interfaces ObservadorLaberinto y
- * ObservadorPersonaje para obtener una interfaz gráfica que controlará el usuario.
- * 
+ * ObservadorPersonaje para obtener una interfaz gráfica que controlará el
+ * usuario.
+ *
  * @author Raquel Romero Pedraza
  * @author Raquel Pulido Pérez
  */
@@ -28,9 +29,10 @@ public class ComecocosFrame extends javax.swing.JFrame implements
      * Constructor de la clase ComecocosFrame con el paso de un objeto modelo y
      * otro controlador, para inicializarlos y registrar el observador de los
      * objetos del modelo; su interfaz gráfica permite el juego.
-     * 
-     * @param modelo        Objeto de la clase Modelo que referencia al modelo.
-     * @param controlador   Objeto de la clase Controlador que referencia al controlador.
+     *
+     * @param modelo Objeto de la clase Modelo que referencia al modelo.
+     * @param controlador Objeto de la clase Controlador que referencia al
+     * controlador.
      */
     public ComecocosFrame(Modelo modelo, Controlador controlador) {
         this();
@@ -43,10 +45,10 @@ public class ComecocosFrame extends javax.swing.JFrame implements
             modelo_.getFantasma(i).registrarObservador(this);
         }
     }
-    
+
     /**
-     * Implementa el cómo de actualizar el observadorLaberinto, volviendo a pintar
-     * los cambios del laberinto actualizados.
+     * Implementa el cómo de actualizar el observadorLaberinto, volviendo a
+     * pintar los cambios del laberinto actualizados.
      */
     @Override
     public void actualizarObservadorLaberinto() {
@@ -55,34 +57,67 @@ public class ComecocosFrame extends javax.swing.JFrame implements
 
     /**
      * Implementa la actualización del dibujo repintando los cambios que haya
-     * además de mostrar los textos de los puntos obtenidos y las vidas restantes,
-     * y el texto final de partida.
+     * además de mostrar los textos de los puntos obtenidos y las vidas
+     * restantes, y el texto final de partida.
      */
     @Override
     public void actualizarObservadorPersonaje() {
         this.getLaberintoPanel().repaint();
         jLabel2.setText(valueOf(modelo_.getPuntos()));
+        jLabel6.setText(setTime(modelo_.getComecocos().getTiempo()));
         jLabel4.setText(valueOf(modelo_.getComecocos().getVidas()));
-        
-        if(modelo_.getPuntos() == 2620 || !modelo_.getComecocos().vivo_){
-            jTextField1.setText("¡Fin de la partida!");
+
+        if (modelo_.getPuntos() == 2620 || !modelo_.getComecocos().vivo_ || modelo_.getComecocos().getTiempo() >= 90000) {
+            jLabel7.setText("¡Fin de la partida!");
             jButton3.setVisible(false); // Si acaba la partida no puede hacer resume
         }
     }
-    
+
+    /**
+     * Método auxiliar que dada una hora en milisegundos
+     * la transforma a formato minutos y milisegundos tal 
+     * que queden en binomios de 00:00
+     * 
+     * @return Hora en formato minutos y segundos
+     */
+    private String setTime(long mili) {
+        int min, segs, restomin;
+        String minutos, segundos;
+        String tiempo;
+
+        min = (int) (mili / 60000);
+        restomin = (int) (mili % 60000);
+        segs = (int) (restomin / 1000);
+
+        if (min < 10) {
+            minutos = "0" + min;
+        } else {
+            minutos = valueOf(min);
+        }
+        if (segs < 10) {
+            segundos = "0" + segs;
+        } else {
+            segundos = valueOf(segs);
+        }
+
+        tiempo = minutos + ":" + segundos;
+
+        return tiempo;
+    }
+
     /**
      * Devuelve el modelo en el que se guardan los objetos de interés.
-     * 
-     * @return  modelo_, el modelo con los estados actuales de los objetos.
+     *
+     * @return modelo_, el modelo con los estados actuales de los objetos.
      */
     public Modelo getModelo() {
         return modelo_;
     }
 
     /**
-     * Devuelve el objeto controlador representante del intermediario entre
-     * la vista y el modelo.
-     * 
+     * Devuelve el objeto controlador representante del intermediario entre la
+     * vista y el modelo.
+     *
      * @return controlador_, el objeto controlador intermediario entre la vista
      * y el modelo
      */
@@ -92,7 +127,7 @@ public class ComecocosFrame extends javax.swing.JFrame implements
 
     /**
      * Devuelve el laberinto del panel del juego.
-     * 
+     *
      * @return laberintoPanel1, el laberinto del panel del juego.
      */
     public LaberintoPanel getLaberintoPanel() {
@@ -120,12 +155,13 @@ public class ComecocosFrame extends javax.swing.JFrame implements
         jLabel1 = new javax.swing.JLabel();
         jButton4 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 11), new java.awt.Dimension(0, 11), new java.awt.Dimension(32767, 11));
         jLabel5 = new javax.swing.JLabel();
         jSeparator5 = new javax.swing.JSeparator();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
 
@@ -213,17 +249,6 @@ public class ComecocosFrame extends javax.swing.JFrame implements
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel2.setText("0");
 
-        jTextField1.setBackground(new java.awt.Color(0, 0, 0));
-        jTextField1.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
-        jTextField1.setForeground(new java.awt.Color(255, 255, 0));
-        jTextField1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField1.setBorder(null);
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
-            }
-        });
-
         jLabel3.setBackground(new java.awt.Color(0, 0, 0));
         jLabel3.setFont(new java.awt.Font("DialogInput", 1, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
@@ -241,47 +266,50 @@ public class ComecocosFrame extends javax.swing.JFrame implements
         jSeparator5.setOrientation(javax.swing.SwingConstants.VERTICAL);
         jSeparator5.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(255, 255, 0)));
 
+        jLabel6.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel6.setFont(new java.awt.Font("DialogInput", 1, 18)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setText("00:00");
+
+        jLabel7.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel7.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(204, 204, 0));
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(33, 33, 33)
-                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(5, 5, 5)))
-                .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(15, 15, 15)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel2Layout.createSequentialGroup()
-                                        .addGap(141, 141, 141)
-                                        .addComponent(filler1, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(jPanel2Layout.createSequentialGroup()
-                                        .addGap(10, 10, 10)
-                                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jLabel3)))
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addGroup(jPanel2Layout.createSequentialGroup()
-                                    .addComponent(jLabel1)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(17, 17, 17)))
+                                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(jPanel2Layout.createSequentialGroup()
+                                            .addGap(0, 129, Short.MAX_VALUE)
+                                            .addComponent(filler1, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(jPanel2Layout.createSequentialGroup()
+                                            .addComponent(jLabel3)
+                                            .addGap(18, 18, 18)
+                                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGap(0, 0, Short.MAX_VALUE))))
+                                .addGroup(jPanel2Layout.createSequentialGroup()
+                                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addGroup(jPanel2Layout.createSequentialGroup()
+                                            .addComponent(jLabel1)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGap(33, 33, 33)))
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGap(15, 15, 15)
                                 .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(36, Short.MAX_VALUE))))
+                        .addContainerGap())))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
@@ -291,11 +319,21 @@ public class ComecocosFrame extends javax.swing.JFrame implements
                         .addGap(45, 45, 45)
                         .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(31, 31, 31)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(5, 5, 5)))
+                .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel2Layout.createSequentialGroup()
                     .addContainerGap()
                     .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(40, Short.MAX_VALUE)))
+                    .addContainerGap(26, Short.MAX_VALUE)))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -315,21 +353,22 @@ public class ComecocosFrame extends javax.swing.JFrame implements
                 .addGap(24, 24, 24)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
-                .addGap(18, 18, 18)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 424, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
                 .addComponent(filler1, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel2Layout.createSequentialGroup()
                     .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 518, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 478, Short.MAX_VALUE)))
+                    .addGap(0, 62, Short.MAX_VALUE)))
         );
 
         javax.swing.GroupLayout laberintoPanel1Layout = new javax.swing.GroupLayout(laberintoPanel1);
@@ -347,7 +386,6 @@ public class ComecocosFrame extends javax.swing.JFrame implements
 
         jMenuBar1.setBackground(new java.awt.Color(0, 0, 0));
         jMenuBar1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jMenuBar1.setForeground(new java.awt.Color(0, 0, 0));
         jMenuBar1.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 12)); // NOI18N
 
         jMenu1.setBackground(new java.awt.Color(0, 255, 255));
@@ -374,16 +412,12 @@ public class ComecocosFrame extends javax.swing.JFrame implements
     private void laberintoPanel1PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_laberintoPanel1PropertyChange
     }//GEN-LAST:event_laberintoPanel1PropertyChange
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
-
     /**
      * Para una acción procedente de un botón de la interfaz gráfica, ejecutará
      * la salida del modelo del juego, terminando por tanto el mismo.
-     * 
+     *
      * @param evt evento procedente de la acción sobre uno de los botones de la
-     *        interfaz.
+     * interfaz.
      */
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         modelo_.salir();
@@ -392,9 +426,9 @@ public class ComecocosFrame extends javax.swing.JFrame implements
     /**
      * Para una acción procedente de un botón de la interfaz gráfica, ejecutará
      * la reanudación del modelo del juego, continuando por donde iba.
-     * 
+     *
      * @param evt evento procedente de la acción sobre uno de los botones de la
-     *        interfaz.
+     * interfaz.
      */
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         modelo_.resume();
@@ -403,9 +437,9 @@ public class ComecocosFrame extends javax.swing.JFrame implements
     /**
      * Para una acción procedente de un botón de la interfaz gráfica, ejecutará
      * la pausa del modelo del juego, congelando todos los elementos del modelo.
-     * 
+     *
      * @param evt evento procedente de la acción sobre uno de los botones de la
-     *        interfaz.
+     * interfaz.
      */
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         modelo_.pausa();
@@ -413,23 +447,23 @@ public class ComecocosFrame extends javax.swing.JFrame implements
 
     /**
      * Para una acción procedente de un botón de la interfaz gráfica, ejecutará
-     * el comienzo del modelo del juego, inicializándolo y desbloqueando el botón
-     * de resume que solo será accesible si el juego ha empezado.
-     * 
+     * el comienzo del modelo del juego, inicializándolo y desbloqueando el
+     * botón de resume que solo será accesible si el juego ha empezado.
+     *
      * @param evt evento procedente de la acción sobre uno de los botones de la
-     *        interfaz.
+     * interfaz.
      */
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         modelo_.start();
         jButton3.setVisible(true);
-        jTextField1.setText("");
+        jLabel7.setText("");
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
-     * Programa principal de la vista que ejecuta un Runable con un nuevo
-     * objeto modelo (que crea al objeto laberinto, comecocos, fantasma...) y con
-     * un nuevo controlador del modelo, creando el objeto comecocosFrame.
-     * 
+     * Programa principal de la vista que ejecuta un Runable con un nuevo objeto
+     * modelo (que crea al objeto laberinto, comecocos, fantasma...) y con un
+     * nuevo controlador del modelo, creando el objeto comecocosFrame.
+     *
      * @param args the command line arguments
      */
     public static void main(String args[]) {
@@ -477,6 +511,8 @@ public class ComecocosFrame extends javax.swing.JFrame implements
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel2;
@@ -485,7 +521,6 @@ public class ComecocosFrame extends javax.swing.JFrame implements
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator5;
     private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextField jTextField1;
     private vista.LaberintoPanel laberintoPanel1;
     // End of variables declaration//GEN-END:variables
 

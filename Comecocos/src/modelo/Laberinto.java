@@ -58,8 +58,8 @@ public class Laberinto {
     private TipoCelda[][] celdas_;//almacena los tipos de celdas del laberinto
     private ObservadorLaberinto observador_;//observa continuamente el laberinto
 
-    private static final int NUMEROFILAS = LABERINTOINICIAL.length; //añado num de filas y columnas que va a tener el laberinto
-    private static final int NUMEROCOLUMNAS = LABERINTOINICIAL[0].length();
+    private static final int NUMEROFILAS = LABERINTOINICIAL.length; // número de filas que va a tener el laberinto
+    private static final int NUMEROCOLUMNAS = LABERINTOINICIAL[0].length(); // número de columnas que va a tener el laberinto
 
     /**
      * Constructor del laberinto que inicializa la matriz bidimensional de
@@ -208,15 +208,8 @@ public class Laberinto {
         
         if (libres > 2) {
             cruce = true;
-        } else {//para el caso que no sea cruce pero no pueda seguir recto
-            if ((izq && drcha) || (arriba && abajo)) {
-                cruce = false;
-            } else {
-                cruce = true;
-            }
-        }
-
+        } 
+        
         return cruce;
     }
-
 }

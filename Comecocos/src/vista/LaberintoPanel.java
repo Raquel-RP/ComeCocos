@@ -7,9 +7,9 @@ import modelo.Comecocos;
 import modelo.Laberinto;
 
 /**
- * Extensión del JPanel que muestra los objetos del laberinto y los personajes, 
+ * Extensión del JPanel que muestra los objetos del laberinto y los personajes,
  * dibujándolos con su posición y tamaño.
- * 
+ *
  * @author Raquel Romero
  * @author Raquel Pulido
  */
@@ -20,7 +20,7 @@ public class LaberintoPanel extends javax.swing.JPanel {
 
     /**
      * Crea una nueva forma de LaberintoPanel inicializando la vista.
-     * 
+     *
      * @param comecocosFrame Objeto vista.
      */
     public LaberintoPanel(ComecocosFrame comecocosFrame) {
@@ -39,7 +39,7 @@ public class LaberintoPanel extends javax.swing.JPanel {
      * Sobreescribe el método paintComponent con el paso del parámetro gráfico g
      * pintando el fondo de la pantalla y dibujando sobre él el laberinto y los
      * personajes correspondientes.
-     * 
+     *
      * @param g gráfico que indica el componente que se dibuja
      */
     @Override
@@ -56,7 +56,7 @@ public class LaberintoPanel extends javax.swing.JPanel {
     /**
      * A partir de un parámetro gráfico, dibuja el laberinto del juego según sea
      * un bloque o pared, una puerta o los cocos.
-     * 
+     *
      * @param g gráfico que indica el componente que se dibuja
      */
     private void dibujarLaberinto(Graphics g) {
@@ -97,7 +97,7 @@ public class LaberintoPanel extends javax.swing.JPanel {
     /**
      * A partir del elemento gráfico, dibujará y rellenará la silueta del
      * personaje comecocos.
-     * 
+     *
      * @param g gráfico que indica el componente a dibujar
      */
     private void dibujarComecocos(Graphics g) { // plano vertical invertido Eje Y mayor hacia abajo
@@ -107,12 +107,32 @@ public class LaberintoPanel extends javax.swing.JPanel {
         g.setColor(Color.yellow);
         g.fillOval(comecocos.getColumna() * anchoCelda,
                 comecocos.getFila() * anchoCelda, anchoCelda, anchoCelda);
+        g.setColor(Color.black);
+        switch (comecocos.getDireccion()) {
+            case IZQUIERDA:
+                g.fillOval((comecocos.getColumna() * anchoCelda),
+                        (comecocos.getFila() * anchoCelda) + anchoCelda / 3, anchoCelda / 2 + 1, anchoCelda / 3+ 1);
+                break;
+            case DERECHA:
+                g.fillOval((comecocos.getColumna() * anchoCelda) + 2 * anchoCelda / 3 - 3,
+                        (comecocos.getFila() * anchoCelda) + anchoCelda / 3, anchoCelda / 2 + 1, anchoCelda / 3 + 1);
+                break;
+            case ARRIBA:
+                g.fillOval((comecocos.getColumna() * anchoCelda) + anchoCelda/3,
+                        (comecocos.getFila() * anchoCelda), anchoCelda / 3 + 1, anchoCelda / 2 + 1);
+                break;
+            case ABAJO:
+                g.fillOval((comecocos.getColumna() * anchoCelda) + anchoCelda / 3,
+                        (comecocos.getFila() * anchoCelda) + 2 * anchoCelda / 3 - 2, anchoCelda / 3 + 1, anchoCelda / 2 + 1);
+                break;
+        }
     }
 
     /**
      * A partir del elemento gráfico, dibujará y rellenará la silueta del
-     * personaje fantasma diferenciando a cada uno de los 4 posibles por colores.
-     * 
+     * personaje fantasma diferenciando a cada uno de los 4 posibles por
+     * colores.
+     *
      * @param g gráfico que indica el componente a dibujar
      */
     private void dibujarFantasmas(Graphics g) {
@@ -180,22 +200,22 @@ public class LaberintoPanel extends javax.swing.JPanel {
 
     /**
      * Para una acción procedente de un evento del ratón, hará que la atención
-     * se focalice en la posición del ratón para que los eventos del teclado
-     * los reciba el panel siempre y cuando el ratón esté sobre el panel.
-     * 
+     * se focalice en la posición del ratón para que los eventos del teclado los
+     * reciba el panel siempre y cuando el ratón esté sobre el panel.
+     *
      * @param evt evento procedente de la acción sobre uno de los botones de la
-     *        interfaz.
+     * interfaz.
      */
     private void formMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseEntered
         requestFocus(); // Para que los eventos del teclado los reciba el panel
     }//GEN-LAST:event_formMouseEntered
 
     /**
-     * Para una acción procedente de una tecla pulsada, captará la tecla que haya
-     * sido presionada.
-     * 
+     * Para una acción procedente de una tecla pulsada, captará la tecla que
+     * haya sido presionada.
+     *
      * @param evt evento procedente de la acción sobre uno de los botones de la
-     *        interfaz.
+     * interfaz.
      */
     private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
         comecocosFrame_.getControlador().teclaPulsadaEnLaberintoPanel(evt);

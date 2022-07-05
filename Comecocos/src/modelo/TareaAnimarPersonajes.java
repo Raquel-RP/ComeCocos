@@ -12,9 +12,8 @@ public class TareaAnimarPersonajes implements Runnable {
     private Modelo modelo_;//objeto modelo del juego que se ha iniciado.
     private int delay_;//retraso del tiempo para controlar la rapidez de movimiento de la hebras
     private boolean continuar_;//true mientras sigue iterando
-    private boolean suspendFlag_;//para detener la hebra momentaneamente
-    long time_inicio = 0, time_final = 0;
-
+    private boolean suspendFlag_;//para suspender la hebra momentaneamente
+    
     /**
      * Constructor de la clase TareaAnimarPersonajes que toma el modelo de
      * entrada y le da valor de inicio a las variables de control de la hebra.
@@ -23,9 +22,9 @@ public class TareaAnimarPersonajes implements Runnable {
      */
     public TareaAnimarPersonajes(Modelo modelo) {
         modelo_ = modelo;
-        delay_ = 200; //valor deseado
+        delay_ = 200; // valor de espera deseado
         continuar_ = true;
-        suspendFlag_ = false; //todo true 
+        suspendFlag_ = false; 
     }
 
     /**

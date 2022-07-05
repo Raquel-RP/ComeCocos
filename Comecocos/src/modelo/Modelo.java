@@ -11,12 +11,30 @@ import java.util.ArrayList;
  */
 public class Modelo {
 
-    private Laberinto laberinto_;
+    /**
+     * Objeto del laberinto empleado en el modelo
+     */
+    private Laberinto laberinto_; 
+    /**
+     * Objeto Comecocos que será el comecocos del modelo
+     */
     private Comecocos comecocos_;
+    /**
+     * Lista de los fantasmas del modelo
+     */
     private ArrayList<Fantasma> fantasmas_;
+    /**
+     * Objeto de la hebra que animará los personajes (comecocos y fantasmas)
+     */
     private TareaAnimarPersonajes animadorPersonajes_;
+    /**
+     * Objeto de la hebra que llevará el control del tiempo
+     */
+    private TareaTiempo cronoJuego_;
+    /**
+     * Puntos obtenidos por el comecocos
+     */
     private int puntos_;
-    long time_inicio;
 
     /**
      * Método constructor sin parámetros que crea los objetos Laberinto,
@@ -34,8 +52,6 @@ public class Modelo {
         fantasmas_.add(new Fantasma(12, 14, Fantasma.NombreFantasma.CLYDE));
 
         puntos_ = 0;
-        time_inicio = System.currentTimeMillis(); //Tiempo en el que empieza
-
     }
 
     /**
@@ -97,13 +113,13 @@ public class Modelo {
         laberinto_.inicializar();
         comecocos_.inicializar(this);
         this.setPuntos(0);
-        time_inicio = System.currentTimeMillis();
 
         for (int i = 0; i < fantasmas_.size(); i++) {
             this.getFantasma(i).inicializar(this);
         }
 
         this.crearTareaLanzarHebraAnimarPersonajes();
+        this.crearTareaLanzarHebraTiempo();
     }
 
     /**
@@ -117,6 +133,15 @@ public class Modelo {
         Thread t = new Thread(animadorPersonajes_); //Hebra creada
         t.start(); //empieza a ejecutarse run
     }
+    
+    public void crearTareaLanzarHebraTiempo() {
+        if (cronoJuego_ != null) {
+            cronoJuego_.terminar();
+        }
+        cronoJuego_ = new TareaTiempo(this);
+        Thread t = new Thread(cronoJuego_); //Hebra creada
+        t.start(); //empieza a ejecutarse run
+    }
 
     /**
      * Inicializa el juego con los valores iniciales y establece el número de
@@ -125,6 +150,7 @@ public class Modelo {
     public void start() {
         this.inicializarJuego();//inicializa el juego con los valores iniciales
         comecocos_.setVidas(3);
+        comecocos_.setTiempo(0);
     }
 
     /**
@@ -133,6 +159,7 @@ public class Modelo {
      */
     public void pausa() {
         this.animadorPersonajes_.pausa();
+        this.cronoJuego_.pausa();
     }
 
     /**
@@ -141,6 +168,7 @@ public class Modelo {
      */
     public void resume() {
         this.animadorPersonajes_.resume();
+        this.cronoJuego_.resume();
     }
 
     /**
@@ -150,6 +178,7 @@ public class Modelo {
      */
     public void salir() {
         this.animadorPersonajes_.terminar();
+        this.cronoJuego_.terminar();
         System.exit(0);
     }
 
