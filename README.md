@@ -11,7 +11,7 @@ Authors:
 <br />
 <div align="center">
   <a href="https://github.com/Raquel-RP/ComeCocos">
-    <img src="images/pacmanlogo.jpg" alt="Logo" width="100" height="100">
+    <img src="images/pacmanlogo.jpg" alt="Logo" width="250" height="200">
   </a>
 
   <h3 align="center">Pac-Man</h3>
