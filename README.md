@@ -73,7 +73,7 @@ Simulation of the PacMan Game made for a university project
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-<img src="images/interface.jpg" alt="Interface" width="300" height="300">
+<img src="images/interface.jpg" alt="Interface" align="center" width="440" height="400">
 <h3 align="center">Interface</h3>
 
 The project is the first to get me in touch with Java interfaces and the use of JPanel forms.
