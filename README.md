@@ -5,6 +5,7 @@ Simulation of the PacMan Game made for a university project
 Authors: 
 * [Raquel Romero](https://github.com/Raquel-RP)
 * [Raquel Pulido](https://github.com/RaquelPP)
+<p align="right">(<a href="#top">back to top</a>)</p>
 
 <br />
 
