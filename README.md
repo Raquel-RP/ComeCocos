@@ -19,7 +19,7 @@ Authors:
   <p align="center">
     A simulation of a simple version of the Pac-Man game for a college project.
     <br />
-    <a href="https://github.com/Raquel-RP/ComeCocos](https://github.com/Raquel-RP/ComeCocos/tree/main/Comecocos"><strong>Explore the project »</strong></a>
+    <a href="https://github.com/Raquel-RP/ComeCocos/tree/main/Comecocos"><strong>Explore the project »</strong></a>
     <br />
     <br />
     <a href="https://github.com/Raquel-RP/ComeCocos/issues">Report Bug</a>
@@ -48,10 +48,8 @@ Authors:
       </ul>
     </li>
     <li><a href="#usage">Usage</a></li>
-    <li><a href="#roadmap">Roadmap</a></li>
     <li><a href="#contributing">Contributing</a></li>
     <li><a href="#contact">Contact</a></li>
-    <li><a href="#acknowledgments">Acknowledgments</a></li>
   </ol>
 </details>
 
@@ -132,8 +130,12 @@ _Below is an example of how you can instruct your audience on installing and set
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-To play the game is just as simple as the PacMan game. Press the button *Start* to start playing, move your keyboard arrows to move the PacMan.
+To play the game is just as simple as the PacMan game. 
+<br />
+Press the button *Start* to start playing, move your keyboard arrows to move the PacMan.
+<br />
 It's important to keep the mouse pointer inside the game intermface for the controls to work. 
+<br />
 Use the *Pause* and *Resume* button to pause and restart the game (the chrono will stop too).
 
 Press the *Exit* button to close the program.
