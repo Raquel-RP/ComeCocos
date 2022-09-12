@@ -2,8 +2,10 @@
 Simulation of the PacMan Game made for a university project 
 
 <br />
-Authors: * [Raquel Romero](https://github.com/Raquel-RP)
-         * [Raquel Pulido](https://github.com/RaquelPP)
+Authors: 
+* [Raquel Romero](https://github.com/Raquel-RP)
+* [Raquel Pulido](https://github.com/RaquelPP)
+
 <br />
 
 <!-- PROJECT LOGO -->
