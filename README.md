@@ -31,11 +31,9 @@ Simulation of the PacMan Game made for a university project
   <p align="center">
     A simulation of a simple version of the Pac-Man game for a college project.
     <br />
-    <a href="https://github.com/Raquel-RP/ComeCocos"><strong>Explore the project »</strong></a>
+    <a href="https://github.com/Raquel-RP/ComeCocos](https://github.com/Raquel-RP/ComeCocos/tree/main/Comecocos"><strong>Explore the project »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/Raquel-RP/ComeCocos">View Demo</a>
-    ·
     <a href="https://github.com/Raquel-RP/ComeCocos/issues">Report Bug</a>
     ·
     <a href="https://github.com/Raquel-RP/ComeCocos/issues">Request Feature</a>
@@ -75,20 +73,18 @@ Simulation of the PacMan Game made for a university project
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
-
 <img src="images/interface.jpg" alt="Interface" width="100" height="100">
 
 The project is the first to get me in touch with Java interfaces and the use of JPanel forms.
-The main goal was making a functional and playable game such as PacMan. It is also the first time
+The main goal was making a functional and playable PacMan game. It is also my first time
 using Threads in programming. 
 
 The main functions the game has are:
-* Being able to play a game with the options: start, pause, resume and exit
-* Gaining points depending on the type of 
-* You should implement DRY principles to the rest of your life :smile:
-
-Of course, no one template will serve all projects since your needs may be different. So I'll be adding more in the near future. You may also suggest changes by forking this repo and creating a pull request or opening an issue. Thanks to all the people have contributed to expanding this template!
+* Being able to play a game with the main options: start, pause, resume and exit
+* Gaining different points depending on the dot it eats
+* Saving each game the highest score
+* PacMan has 3 lives
+* Functional chrono for each game
 
 Use the `BLANK_README.md` to get started.
 
