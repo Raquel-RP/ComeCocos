@@ -106,18 +106,16 @@ This is an example of how to list things you need to use the software and how to
   ```
 
 ### Installation
-
+Follos the next steps to run the project. I recommend using an IDE such as NetBeans for an easier process.
 1. Clone the repo
    ```sh
    git clone git@github.com:Raquel-RP/ComeCocos.git
    ```
-2. Compile the project 
-   ```sh
-   I used jdk 17.0.2 compiler
-   ```
+2. Compile the project (I used jdk 17.0.2 compiler)
 3. Execute the project
    ```js
-   const API_KEY = 'ENTER YOUR API';
+   run the Comecocos.jar file 
+   PATH ComeCocos/ComeCocos/dist/Comecocos.jar
    ```
 
 <p align="right">(<a href="#top">back to top</a>)</p>
