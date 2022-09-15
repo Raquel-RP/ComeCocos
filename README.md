@@ -10,7 +10,7 @@ Authors:
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <a href="https://github.com/Raquel-RP/ComeCocos">
+  <a href="https://github.com/Raquel-RP/PacMan">
     <img src="images/pacmanlogo.jpg" alt="Logo" width="250" height="200">
   </a>
 
@@ -43,7 +43,6 @@ Authors:
     <li>
       <a href="#getting-started">Getting Started</a>
       <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
         <li><a href="#installation">Installation</a></li>
       </ul>
     </li>
@@ -97,19 +96,11 @@ The resources used:
 
 Before running the project you need to follow some steps.
 
-### Prerequisites
-
-This is an example of how to list things you need to use the software and how to install them.
-* npm
-  ```sh
-  npm install npm@latest -g
-  ```
-
 ### Installation
 Follos the next steps to run the project. I recommend using an IDE such as NetBeans for an easier process.
 1. Clone the repo
    ```sh
-   git clone git@github.com:Raquel-RP/ComeCocos.git
+   git clone git@github.com:Raquel-RP/PacMan.git
    ```
 2. Compile the project (I used jdk 17.0.2 compiler)
 3. Execute the project
@@ -161,6 +152,6 @@ Don't forget to give the project a star! Thanks again!
 
 Raquel Romero - raquelrp1426@hotmail.com
 
-Project Link: [https://github.com/Raquel-RP/ComeCocos](https://github.com/Raquel-RP/ComeCocos)
+Project Link: [https://github.com/Raquel-RP/PacMan](https://github.com/Raquel-RP/PacMan)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
