@@ -107,18 +107,15 @@ This is an example of how to list things you need to use the software and how to
 
 ### Installation
 
-_Below is an example of how you can instruct your audience on installing and setting up your app. This template doesn't rely on any external dependencies or services._
-
-1. Get a free API Key at [https://example.com](https://example.com)
-2. Clone the repo
+1. Clone the repo
    ```sh
    git clone git@github.com:Raquel-RP/ComeCocos.git
    ```
-3. Install NPM packages
+2. Compile the project 
    ```sh
-   npm install
+   I used jdk 17.0.2 compiler
    ```
-4. Enter your API in `config.js`
+3. Execute the project
    ```js
    const API_KEY = 'ENTER YOUR API';
    ```
